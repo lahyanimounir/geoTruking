@@ -74,6 +74,11 @@ public class acceuil extends javax.swing.JFrame {
         jLabel8.setBounds(620, 40, 170, 130);
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javaapplication1/camion.png"))); // NOI18N
+        jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel7MouseClicked(evt);
+            }
+        });
         jPanel2.add(jLabel7);
         jLabel7.setBounds(80, 50, 180, 110);
 
@@ -142,6 +147,28 @@ public class acceuil extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jLabel9MouseClicked
 
+    private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
+        // TODO add your handling code here:
+         Camion camion = new Camion();
+        camion.setVisible(true);
+        double height = camion.getHeight();
+             double width = camion.getWidth();
+             Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+                double widthscreen = screenSize.getWidth();               
+                double heightscreen = screenSize.getHeight();
+
+             
+            
+             int north =  (int)((widthscreen - width)/2);             
+             int heightMiddel =  (int)((heightscreen - height)/2);
+
+             camion.setLocation(north, heightMiddel);
+            this.dispose();
+            
+            
+        
+    }//GEN-LAST:event_jLabel7MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -152,9 +179,9 @@ public class acceuil extends javax.swing.JFrame {
               
             
               
-        connect.myRes = connect.myst.executeQuery("select * from persone");
-            while(connect.myRes.next()){
-                System.out.println(connect.myRes.getString("nom"));
+        connection.myRes = connection.myst.executeQuery("select * from persone");
+            while(connection.myRes.next()){
+                System.out.println(connection.myRes.getString("nom"));
             }
              } catch (SQLException e) {
             System.out.println(e);
@@ -183,24 +210,18 @@ public class acceuil extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-             acceuil a = new acceuil();
-             double height = a.getHeight();
-             double width = a.getWidth();
-             Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-                double widthscreen = screenSize.getWidth();               
-                double heightscreen = screenSize.getHeight();
-
-             
-            
-             int north =  (int)((widthscreen - width)/2);             
-             int heightMiddel =  (int)((heightscreen - height)/2);
-
-             a.setLocation(north, heightMiddel);
-             a.setVisible(true); 
-            }
-        });
+        java.awt.EventQueue.invokeLater(() -> {
+            acceuil a = new acceuil();
+            double height1 = a.getHeight();
+            double width1 = a.getWidth();
+            Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+            double widthscreen = screenSize.getWidth();
+            double heightscreen = screenSize.getHeight();
+            int north = (int) ((widthscreen - width1) / 2);
+            int heightMiddel = (int) ((heightscreen - height1) / 2);
+            a.setLocation(north, heightMiddel);
+            a.setVisible(true);
+         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

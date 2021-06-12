@@ -17,13 +17,13 @@ public  class connection {
     public void connectionDb(){
           try {
            
-            this.myconnection = DriverManager.getConnection("jdbc:mysql://localhost:3306/geotruking","root","");
+            connection.myconnection = DriverManager.getConnection("jdbc:mysql://localhost:3306/geotruking","root","");
         
-            this.myst = myconnection.createStatement();
+            connection.myst = myconnection.createStatement();
             
           
         
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println(e);
         }
         

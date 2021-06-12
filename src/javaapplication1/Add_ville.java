@@ -87,6 +87,12 @@ public class Add_ville extends javax.swing.JFrame {
         jLabel1.setText("Ville");
         jPanel2.add(jLabel1);
         jLabel1.setBounds(40, 120, 34, 14);
+
+        ville_name.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ville_nameActionPerformed(evt);
+            }
+        });
         jPanel2.add(ville_name);
         ville_name.setBounds(110, 110, 270, 40);
 
@@ -120,11 +126,11 @@ public class Add_ville extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 432, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 432, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
         );
 
         pack();
@@ -190,6 +196,10 @@ public class Add_ville extends javax.swing.JFrame {
             }
         
     }//GEN-LAST:event_addcityMouseClicked
+
+    private void ville_nameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ville_nameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ville_nameActionPerformed
 
     /**
      * @param args the command line arguments

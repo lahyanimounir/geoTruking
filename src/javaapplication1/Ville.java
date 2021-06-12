@@ -58,8 +58,8 @@ public class Ville extends javax.swing.JFrame {
             connect.connectionDb();
           
             
-            jTable1.getTableHeader().setOpaque(false);
-            jTable1.getTableHeader().setBackground(new Color(32,136,203));
+            jTable.getTableHeader().setOpaque(false);
+            jTable.getTableHeader().setBackground(new Color(32,136,203));
            
      
               
@@ -69,7 +69,7 @@ public class Ville extends javax.swing.JFrame {
                 String nom = String.valueOf(connect.myRes.getString("nom"));
                 
                 String tbData[] = {id,nom};
-                DefaultTableModel tblModel = (DefaultTableModel)jTable1.getModel();
+                DefaultTableModel tblModel = (DefaultTableModel)jTable.getModel();
                 tblModel.addRow(tbData);
             }
              } catch (SQLException e) {
@@ -88,14 +88,14 @@ public class Ville extends javax.swing.JFrame {
     private void initComponents() {
 
         jDialog1 = new javax.swing.JDialog();
+        jLabel3 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTable = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
         jDialog1.getContentPane().setLayout(jDialog1Layout);
@@ -107,6 +107,10 @@ public class Ville extends javax.swing.JFrame {
             jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 300, Short.MAX_VALUE)
         );
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javaapplication1/bg3.png"))); // NOI18N
+        jLabel3.setText("jLabel3");
+        jLabel3.setFocusable(false);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -121,8 +125,8 @@ public class Ville extends javax.swing.JFrame {
         jPanel2.add(jButton1);
         jButton1.setBounds(90, 80, 69, 23);
 
-        jTable1.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTable.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -130,23 +134,23 @@ public class Ville extends javax.swing.JFrame {
                 "Id", "Ville"
             }
         ));
-        jTable1.setFocusable(false);
-        jTable1.setIntercellSpacing(new java.awt.Dimension(0, 0));
-        jTable1.setOpaque(false);
-        jTable1.setRowHeight(30);
-        jTable1.setSelectionBackground(new java.awt.Color(116, 192, 238));
-        jTable1.setShowVerticalLines(false);
-        jTable1.getTableHeader().setResizingAllowed(false);
-        jTable1.getTableHeader().setReorderingAllowed(false);
-        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+        jTable.setFocusable(false);
+        jTable.setIntercellSpacing(new java.awt.Dimension(0, 0));
+        jTable.setOpaque(false);
+        jTable.setRowHeight(30);
+        jTable.setSelectionBackground(new java.awt.Color(116, 192, 238));
+        jTable.setShowVerticalLines(false);
+        jTable.getTableHeader().setResizingAllowed(false);
+        jTable.getTableHeader().setReorderingAllowed(false);
+        jTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTable1MouseClicked(evt);
+                jTableMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTable);
 
         jPanel2.add(jScrollPane1);
-        jScrollPane1.setBounds(150, 140, 640, 240);
+        jScrollPane1.setBounds(90, 130, 640, 240);
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
         jLabel1.setText("précédent");
@@ -175,12 +179,6 @@ public class Ville extends javax.swing.JFrame {
         });
         jPanel2.add(jLabel4);
         jLabel4.setBounds(770, 410, 80, 100);
-
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javaapplication1/bg3.png"))); // NOI18N
-        jLabel3.setText("jLabel3");
-        jLabel3.setFocusable(false);
-        jPanel2.add(jLabel3);
-        jLabel3.setBounds(0, 0, 920, 580);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -274,11 +272,11 @@ public class Ville extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jLabel2MouseClicked
 
-    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+    private void jTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableMouseClicked
         // TODO add your handling code here:
         
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        int selectedrow = jTable1.getSelectedRow();
+        DefaultTableModel model = (DefaultTableModel) jTable.getModel();
+        int selectedrow = jTable.getSelectedRow();
         
         
         this.setId(model.getValueAt(selectedrow, 0).toString());        
@@ -287,7 +285,7 @@ public class Ville extends javax.swing.JFrame {
             
         /**/
      
-    }//GEN-LAST:event_jTable1MouseClicked
+    }//GEN-LAST:event_jTableMouseClicked
 
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
         // TODO add your handling code here:
@@ -306,7 +304,7 @@ public class Ville extends javax.swing.JFrame {
 
                     int rowsInserted = statement.executeUpdate();
                  
-                      DefaultTableModel dm = (DefaultTableModel) this.jTable1.getModel();
+                      DefaultTableModel dm = (DefaultTableModel) this.jTable.getModel();
                       int rowCount = dm.getRowCount();
                       //Remove rows one by one from the end of the table
                       for (int i = rowCount - 1; i >= 0; i--) {
@@ -322,7 +320,7 @@ public class Ville extends javax.swing.JFrame {
                         String nom = String.valueOf(connect.myRes.getString("nom"));
 
                         String tbData[] = {id,nom};
-                        DefaultTableModel tblModel = (DefaultTableModel)this.jTable1.getModel();
+                        DefaultTableModel tblModel = (DefaultTableModel)this.jTable.getModel();
                         tblModel.addRow(tbData);
                     }
          
@@ -347,6 +345,6 @@ public class Ville extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable;
     // End of variables declaration//GEN-END:variables
 }
