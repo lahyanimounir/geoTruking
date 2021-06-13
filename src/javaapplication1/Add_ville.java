@@ -33,9 +33,6 @@ public class Add_ville extends javax.swing.JFrame {
             connection connect = new connection();
             connect.connectionDb();
           
-            
-          
-           
               
         connect.myRes = connect.myst.executeQuery("select * from ville");
             while(connect.myRes.next()){
@@ -198,6 +195,7 @@ public class Add_ville extends javax.swing.JFrame {
     }//GEN-LAST:event_addcityMouseClicked
 
     private void ville_nameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ville_nameActionPerformed
+
         // TODO add your handling code here:
     }//GEN-LAST:event_ville_nameActionPerformed
 

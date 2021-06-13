@@ -9,8 +9,10 @@ package javaapplication1;
  *
  * @author Pc
  */
-public class Admin extends Personne{
+public class Admin extends javax.swing.JFrame{
 
+    private String id;
+    
     /**
      * Creates new form Admin
      */

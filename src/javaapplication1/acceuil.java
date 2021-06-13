@@ -96,6 +96,11 @@ public class acceuil extends javax.swing.JFrame {
         jLabel10.setBounds(370, 310, 170, 160);
 
         jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javaapplication1/conducteur.png"))); // NOI18N
+        jLabel12.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel12MouseClicked(evt);
+            }
+        });
         jPanel2.add(jLabel12);
         jLabel12.setBounds(100, 270, 170, 150);
 
@@ -168,6 +173,28 @@ public class acceuil extends javax.swing.JFrame {
             
         
     }//GEN-LAST:event_jLabel7MouseClicked
+
+    private void jLabel12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MouseClicked
+        // TODO add your handling code here:
+         Condicteur cond = new Condicteur();
+        cond.setVisible(true);
+        double height = cond.getHeight();
+             double width = cond.getWidth();
+             Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+                double widthscreen = screenSize.getWidth();               
+                double heightscreen = screenSize.getHeight();
+
+             
+            
+             int north =  (int)((widthscreen - width)/2);             
+             int heightMiddel =  (int)((heightscreen - height)/2);
+
+             cond.setLocation(north, heightMiddel);
+            this.dispose();
+            
+            
+        
+    }//GEN-LAST:event_jLabel12MouseClicked
 
     /**
      * @param args the command line arguments

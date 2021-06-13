@@ -69,6 +69,7 @@ public class Ville extends javax.swing.JFrame {
                 String nom = String.valueOf(connect.myRes.getString("nom"));
                 
                 String tbData[] = {id,nom};
+                System.out.println(tbData);
                 DefaultTableModel tblModel = (DefaultTableModel)jTable.getModel();
                 tblModel.addRow(tbData);
             }
