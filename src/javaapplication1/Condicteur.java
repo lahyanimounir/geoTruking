@@ -83,12 +83,12 @@ public class Condicteur extends javax.swing.JFrame {
             while(connection.myRes.next()){
                 String id = String.valueOf(connection.myRes.getString("id"));
                 String nom = String.valueOf(connection.myRes.getString("nom"));
-                String prenom = String.valueOf(connection.myRes.getString("prenom"));
+              /*  String prenom = String.valueOf(connection.myRes.getString("prenom"));
                 String login = String.valueOf(connection.myRes.getString("login"));
                 String password = String.valueOf(connection.myRes.getString("password"));
-                String role = String.valueOf(connection.myRes.getInt("role"));
+                String role = String.valueOf(connection.myRes.getInt("role"));*/
                 
-                String tbData[] = {id,nom,prenom,login,password,role};
+                String[] tbData = {id,nom};
                 System.out.println(tbData);
                 DefaultTableModel tblModel = (DefaultTableModel)jTable1.getModel();
                 tblModel.addRow(tbData);

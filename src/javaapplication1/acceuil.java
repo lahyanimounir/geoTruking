@@ -176,7 +176,7 @@ public class acceuil extends javax.swing.JFrame {
 
     private void jLabel12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MouseClicked
         // TODO add your handling code here:
-         Condicteur cond = new Condicteur();
+         Pesonne cond = new Pesonne();
         cond.setVisible(true);
         double height = cond.getHeight();
              double width = cond.getWidth();
