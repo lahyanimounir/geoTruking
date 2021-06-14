@@ -68,7 +68,6 @@ public class Add_admin extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         con_name = new javax.swing.JTextField();
-        addcity = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -76,6 +75,7 @@ public class Add_admin extends javax.swing.JFrame {
         con_pre = new javax.swing.JTextField();
         con_log = new javax.swing.JTextField();
         con_pwd = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
@@ -96,7 +96,7 @@ public class Add_admin extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
         jLabel1.setText("Nom");
         jPanel2.add(jLabel1);
-        jLabel1.setBounds(60, 80, 34, 14);
+        jLabel1.setBounds(120, 100, 34, 19);
 
         con_name.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -104,17 +104,7 @@ public class Add_admin extends javax.swing.JFrame {
             }
         });
         jPanel2.add(con_name);
-        con_name.setBounds(130, 70, 160, 30);
-
-        addcity.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
-        addcity.setText("Ajouter");
-        addcity.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                addcityMouseClicked(evt);
-            }
-        });
-        jPanel2.add(addcity);
-        addcity.setBounds(410, 370, 110, 27);
+        con_name.setBounds(220, 100, 160, 30);
 
         jLabel2.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
         jLabel2.setText("précédent");
@@ -129,17 +119,17 @@ public class Add_admin extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jLabel4.setText("Prénom");
         jPanel2.add(jLabel4);
-        jLabel4.setBounds(60, 130, 50, 20);
+        jLabel4.setBounds(120, 150, 50, 30);
 
         jLabel5.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jLabel5.setText("Login");
         jPanel2.add(jLabel5);
-        jLabel5.setBounds(60, 180, 50, 20);
+        jLabel5.setBounds(120, 200, 50, 30);
 
         jLabel6.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jLabel6.setText("Password");
         jPanel2.add(jLabel6);
-        jLabel6.setBounds(60, 220, 60, 30);
+        jLabel6.setBounds(120, 240, 60, 40);
 
         con_pre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -147,11 +137,15 @@ public class Add_admin extends javax.swing.JFrame {
             }
         });
         jPanel2.add(con_pre);
-        con_pre.setBounds(130, 120, 160, 30);
+        con_pre.setBounds(220, 150, 160, 30);
         jPanel2.add(con_log);
-        con_log.setBounds(130, 170, 160, 30);
+        con_log.setBounds(220, 200, 160, 30);
         jPanel2.add(con_pwd);
-        con_pwd.setBounds(130, 220, 160, 30);
+        con_pwd.setBounds(220, 250, 160, 30);
+
+        jButton1.setText("Ajouter");
+        jPanel2.add(jButton1);
+        jButton1.setBounds(440, 350, 73, 23);
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javaapplication1/bg3.png"))); // NOI18N
         jLabel3.setText("jLabel3");
@@ -194,47 +188,6 @@ public class Add_admin extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jLabel2MouseClicked
 
-    private void addcityMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addcityMouseClicked
-        // TODO add your handling code here:
-       
-      
-            try {
-                 connection connect = new connection();
-                    connect.connectionDb();
-                    String sql = "INSERT INTO `persone`(`nom`, `prenom`, `login`, `password`, `role`) VALUES (?,?,?,?,1)";
- 
-                    PreparedStatement statement = connect.myconnection.prepareStatement(sql);
-                    statement.setString(1, con_name.getText());
-                    statement.setString(2, con_pre.getText());
-                    statement.setString(3, con_log.getText());
-                    statement.setString(4, con_pwd.getText());
-                    int rowsInserted = statement.executeUpdate();
-                    if (rowsInserted > 0) {
-                        Admin p = new Admin();
-                        double height = p.getHeight();
-                             double width = p.getWidth();
-                             Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-                                double widthscreen = screenSize.getWidth();               
-                                double heightscreen = screenSize.getHeight();
-
-
-
-                             int north =  (int)((widthscreen - width)/2);             
-                             int heightMiddel =  (int)((heightscreen - height)/2);
-
-                             p.setLocation(north, heightMiddel);
-
-                        p.setVisible(true);
-                        this.dispose();
-                    }
-            
-              
-            } catch (SQLException ex) {
-                Logger.getLogger(Add_admin.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        
-    }//GEN-LAST:event_addcityMouseClicked
-
     private void con_nameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_con_nameActionPerformed
 
         // TODO add your handling code here:
@@ -249,11 +202,11 @@ public class Add_admin extends javax.swing.JFrame {
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton addcity;
     private javax.swing.JTextField con_log;
     private javax.swing.JTextField con_name;
     private javax.swing.JTextField con_pre;
     private javax.swing.JTextField con_pwd;
+    private javax.swing.JButton jButton1;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

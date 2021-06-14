@@ -48,17 +48,23 @@ public class Mission extends javax.swing.JFrame {
            
      
               // 0 condicteur 1 administrateur
-        connect.myRes = connect.myst.executeQuery("select id,isArrived,date_depart,date_arriver,id_conducteur,id_ville_depart, id_ville_arriver from mission ");
+        connect.myRes = connect.myst.executeQuery("SELECT mission.id, camion.immatriculation, persone.nom, persone.prenom, persone.login, persone.password, mission.id_conducteur, mission.date_depart, mission.date_arriver, suivi.id_camion, suivi.id_mission, mission.consommation_capter, mission.isArrived, persone.role, (SELECT ville.nom FROM ville WHERE mission.id_ville_depart = ville.id) AS ville_depart, (SELECT ville.nom FROM ville WHERE mission.id_ville_arriver = ville.id) AS ville_arriver,mission.id_ville_arriver FROM mission LEFT OUTER JOIN suivi ON (suivi.id_mission = mission.id) LEFT OUTER JOIN persone ON (mission.id_conducteur = persone.id) LEFT OUTER JOIN camion ON (camion.id = suivi.id_camion)");
             while(connect.myRes.next()){
-                String id = String.valueOf(connect.myRes.getString("id"));
-                String isArrived = String.valueOf(connect.myRes.getString("isArrived"));                
-                String date_depart = String.valueOf(connect.myRes.getString("date_depart"));                
-                String date_arriver = String.valueOf(connect.myRes.getString("date_arriver"));                
-                String id_conducteur = String.valueOf(connect.myRes.getString("id_conducteur"));
-                String id_ville_depart = String.valueOf(connect.myRes.getString("id_ville_depart"));
-                String id_ville_arriver = String.valueOf(connect.myRes.getString("id_ville_arriver"));
+                String id = String.valueOf(connect.myRes.getString("mission.id"));
+                String isArrived = String.valueOf(connect.myRes.getString("mission.isArrived"));                
+                String date_depart = String.valueOf(connect.myRes.getString("mission.date_depart"));                
+                String date_arriver = String.valueOf(connect.myRes.getString("mission.date_arriver"));                
+                String nom = String.valueOf(connect.myRes.getString("persone.nom"));                
+                String prenom = String.valueOf(connect.myRes.getString("persone.prenom"));
+                String ville_depart = String.valueOf(connect.myRes.getString("ville_depart"));
+                String ville_arriver = String.valueOf(connect.myRes.getString("ville_arriver"));                
+                String immatriculation = String.valueOf(connect.myRes.getString("camion.immatriculation"));                
+                String consommation_capter = String.valueOf(connect.myRes.getString("mission.consommation_capter"));
+
+
                 
-                String tbData[] = {id,isArrived,date_depart,date_arriver,id_conducteur,id_ville_depart,id_ville_arriver};
+
+                String tbData[] = {id,isArrived,date_depart,date_arriver,nom,prenom,ville_depart,ville_arriver,immatriculation,consommation_capter};
                 System.out.println(tbData);
                 DefaultTableModel tblModel = (DefaultTableModel)jTable.getModel();
                 tblModel.addRow(tbData);
@@ -88,7 +94,6 @@ public class Mission extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
 
         javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
         jDialog1.getContentPane().setLayout(jDialog1Layout);
@@ -124,7 +129,7 @@ public class Mission extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Id", "is-Arrived", "Date_départ", "Date_arriver", "Id_Conducteur", "ville_depart", "Ville_arriver"
+                "Id", "is-Arrived", "Date_départ", "Date_arriver", "Nom", "Prenom", "ville_depart", "Ville_arriver", "matricule", "Consomation"
             }
         ));
         jTable.setFocusable(false);
@@ -143,7 +148,7 @@ public class Mission extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTable);
 
         jPanel2.add(jScrollPane1);
-        jScrollPane1.setBounds(70, 130, 570, 200);
+        jScrollPane1.setBounds(70, 130, 790, 200);
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
         jLabel1.setText("précédent");
@@ -162,7 +167,7 @@ public class Mission extends javax.swing.JFrame {
             }
         });
         jPanel2.add(jLabel2);
-        jLabel2.setBounds(90, 380, 70, 90);
+        jLabel2.setBounds(90, 400, 70, 90);
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javaapplication1/trush.png"))); // NOI18N
         jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -171,17 +176,12 @@ public class Mission extends javax.swing.JFrame {
             }
         });
         jPanel2.add(jLabel4);
-        jLabel4.setBounds(500, 380, 80, 100);
+        jLabel4.setBounds(780, 390, 80, 100);
 
         jButton2.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jButton2.setText("Suivre le conducteur");
         jPanel2.add(jButton2);
-        jButton2.setBounds(700, 133, 180, 40);
-
-        jButton3.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jButton3.setText("consommation capter");
-        jPanel2.add(jButton3);
-        jButton3.setBounds(700, 200, 190, 40);
+        jButton2.setBounds(670, 80, 190, 40);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -199,7 +199,24 @@ public class Mission extends javax.swing.JFrame {
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         // TODO add your handling code here:
-       
+       Add_mission add = new Add_mission();
+        
+        
+            double height = add.getHeight();
+             double width = add.getWidth();
+             Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+                double widthscreen = screenSize.getWidth();               
+                double heightscreen = screenSize.getHeight();
+
+             
+            
+             int north =  (int)((widthscreen - width)/2);             
+             int heightMiddel =  (int)((heightscreen - height)/2);
+
+             add.setLocation(north, heightMiddel);
+        
+        add.setVisible(true);
+        this.dispose();
             
     }//GEN-LAST:event_jButton1MouseClicked
 
@@ -256,7 +273,6 @@ public class Mission extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
