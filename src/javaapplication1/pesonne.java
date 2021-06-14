@@ -25,26 +25,49 @@ import javax.swing.table.DefaultTableModel;
 public class Pesonne extends javax.swing.JFrame {
     
     
-        private String id;
-        private String ville;
-        private boolean selected;
-        static JFrame f;
+        protected String id;
+    protected String nom ;
+    protected String prénom ;
+    protected String login ;
+    protected String password ;
+    protected int role ;
+    private boolean selected;
+    static JFrame f;
         
         
     public void setId(String id) {
         this.id = id;
     }
 
-    public void setVille(String ville) {
-        this.ville = ville;
+   public void setnom(String nom) {
+        this.nom = nom;
     }
 
-    public String getId() {
+     public void setprénom(String prénom) {
+        this.prénom = prénom;
+    }
+      public void setlogin(String login) {
+        this.login = login;
+    }
+       public void setpassword(String password) {
+        this.password = password;
+    }
+     public String getId() {
         return id;
     }
 
-    public String getVille() {
-        return ville;
+    public String getnom() {
+        return nom;
+    }
+    
+      public String getprénom() {
+        return prénom;
+    }
+        public String getlogin() {
+        return login;
+    }
+          public String getpassword() {
+        return password;
     }
         
        
@@ -71,11 +94,6 @@ public class Pesonne extends javax.swing.JFrame {
                 String login = String.valueOf(connect.myRes.getString("login"));                
                 String password = String.valueOf(connect.myRes.getString("password"));
                 String roleToShow = "Conducteur";
-                
-
-
-
-                
                 String tbData[] = {id,nom,prenom,login,password,roleToShow};
                 System.out.println(tbData);
                 DefaultTableModel tblModel = (DefaultTableModel)jTable.getModel();
@@ -205,11 +223,11 @@ public class Pesonne extends javax.swing.JFrame {
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         // TODO add your handling code here:
-        Add_ville add = new Add_ville();
+        Add_conducteur cond = new Add_conducteur();
         
         
-            double height = add.getHeight();
-             double width = add.getWidth();
+            double height = cond.getHeight();
+             double width = cond.getWidth();
              Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
                 double widthscreen = screenSize.getWidth();               
                 double heightscreen = screenSize.getHeight();
@@ -219,9 +237,9 @@ public class Pesonne extends javax.swing.JFrame {
              int north =  (int)((widthscreen - width)/2);             
              int heightMiddel =  (int)((heightscreen - height)/2);
 
-             add.setLocation(north, heightMiddel);
+             cond.setLocation(north, heightMiddel);
         
-        add.setVisible(true);
+        cond.setVisible(true);
         this.dispose();
         
             
@@ -253,7 +271,7 @@ public class Pesonne extends javax.swing.JFrame {
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
         // TODO add your handling code here:
         
-        Update_ville u = new Update_ville(this.id,this.ville);
+        Update_Con u = new Update_Con(this.id,this.nom,this.prénom,this.login, this.password);
         
          double height = u.getHeight();
              double width = u.getWidth();
@@ -289,10 +307,14 @@ public class Pesonne extends javax.swing.JFrame {
         
         
         this.setId(model.getValueAt(selectedrow, 0).toString());        
-        this.setVille( model.getValueAt(selectedrow, 1).toString());
+        this.setnom( model.getValueAt(selectedrow, 1).toString());
+        this.setprénom( model.getValueAt(selectedrow, 2).toString());
+        this.setlogin( model.getValueAt(selectedrow, 3).toString());
+        this.setpassword( model.getValueAt(selectedrow, 4).toString());
+        this.role=0;
         this.selected = true;
             
-        /**/
+        
      
     }//GEN-LAST:event_jTableMouseClicked
 
@@ -305,7 +327,7 @@ public class Pesonne extends javax.swing.JFrame {
                  connection connect = new connection();
                     connect.connectionDb();
                     
-                    String sql = "DELETE FROM `ville` WHERE `id`= ?";
+                    String sql = "DELETE FROM `persone` WHERE `id`= ?";
  
                     PreparedStatement statement = connect.myconnection.prepareStatement(sql);
                     statement.setString(1, this.id);                      
@@ -322,13 +344,17 @@ public class Pesonne extends javax.swing.JFrame {
                           
                           
                           
-                    connect.myRes = connect.myst.executeQuery("select * from ville");
+                    connect.myRes = connect.myst.executeQuery("select * from persone WHERE 'role'=0");
                    
                     while(connect.myRes.next()){
                         String id = String.valueOf(connect.myRes.getString("id"));
                         String nom = String.valueOf(connect.myRes.getString("nom"));
+                        String prenom = String.valueOf(connect.myRes.getString("prenom"));
+                        String login = String.valueOf(connect.myRes.getString("login"));
+                        String password = String.valueOf(connect.myRes.getString("password"));
+                        String roleToShow = "Conducteur";
 
-                        String tbData[] = {id,nom};
+                        String tbData[] = {id,nom,prenom,login,password,roleToShow};
                         DefaultTableModel tblModel = (DefaultTableModel)this.jTable.getModel();
                         tblModel.addRow(tbData);
                     }
@@ -336,7 +362,7 @@ public class Pesonne extends javax.swing.JFrame {
             
               
             } catch (SQLException ex) {
-                Logger.getLogger(Update_ville.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Update_Con.class.getName()).log(Level.SEVERE, null, ex);
             }
         
     }//GEN-LAST:event_jLabel4MouseClicked
@@ -344,6 +370,7 @@ public class Pesonne extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

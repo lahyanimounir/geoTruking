@@ -8,6 +8,7 @@ package javaapplication1;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.sql.*;
+import java.util.Locale;
 
 /**
  *
@@ -70,6 +71,11 @@ public class acceuil extends javax.swing.JFrame {
         jLabel6.setBounds(400, 480, 130, 30);
 
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javaapplication1/mission.png"))); // NOI18N
+        jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel8MouseClicked(evt);
+            }
+        });
         jPanel2.add(jLabel8);
         jLabel8.setBounds(620, 40, 170, 130);
 
@@ -92,6 +98,11 @@ public class acceuil extends javax.swing.JFrame {
         jLabel9.setBounds(640, 260, 150, 160);
 
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javaapplication1/admin.png"))); // NOI18N
+        jLabel10.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel10MouseClicked(evt);
+            }
+        });
         jPanel2.add(jLabel10);
         jLabel10.setBounds(370, 310, 170, 160);
 
@@ -161,15 +172,15 @@ public class acceuil extends javax.swing.JFrame {
              Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
                 double widthscreen = screenSize.getWidth();               
                 double heightscreen = screenSize.getHeight();
-
+              int north1 =  (int)(widthscreen *2/3);             
+             int heightMiddel1 =  (int)(heightscreen *2/3);
+             camion.setSize(north1, heightMiddel1);
              
-            
-             int north =  (int)((widthscreen - width)/2);             
-             int heightMiddel =  (int)((heightscreen - height)/2);
-
-             camion.setLocation(north, heightMiddel);
+           /* int north =  (int)((widthscreen - width)/2);             
+            int heightMiddel =  (int)((heightscreen - height)/2);
+             camion.setLocation(north, heightMiddel);*/
             this.dispose();
-            
+
             
         
     }//GEN-LAST:event_jLabel7MouseClicked
@@ -189,12 +200,52 @@ public class acceuil extends javax.swing.JFrame {
              int north =  (int)((widthscreen - width)/2);             
              int heightMiddel =  (int)((heightscreen - height)/2);
 
-             cond.setLocation(north, heightMiddel);
-            this.dispose();
+               cond.setLocation(north, heightMiddel);
+               this.dispose();
             
             
         
     }//GEN-LAST:event_jLabel12MouseClicked
+
+    private void jLabel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseClicked
+        // TODO add your handling code here:
+         Admin cond = new Admin();
+        cond.setVisible(true);
+        double height = cond.getHeight();
+             double width = cond.getWidth();
+             Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+                double widthscreen = screenSize.getWidth();               
+                double heightscreen = screenSize.getHeight();
+
+             
+            
+             int north =  (int)((widthscreen - width)/2);             
+             int heightMiddel =  (int)((heightscreen - height)/2);
+
+             cond.setLocation(north, heightMiddel);
+            this.dispose();
+            
+            
+    }//GEN-LAST:event_jLabel10MouseClicked
+
+    private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
+        // TODO add your handling code here:
+         Mission m = new Mission();
+        m.setVisible(true);
+        double height = m.getHeight();
+             double width = m.getWidth();
+             Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+                double widthscreen = screenSize.getWidth();               
+                double heightscreen = screenSize.getHeight();
+
+             
+            
+             int north =  (int)((widthscreen - width)/2);             
+             int heightMiddel =  (int)((heightscreen - height)/2);
+
+             m.setLocation(north, heightMiddel);
+            this.dispose();
+    }//GEN-LAST:event_jLabel8MouseClicked
 
     /**
      * @param args the command line arguments

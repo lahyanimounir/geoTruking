@@ -22,59 +22,21 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author user
  */
-public class Admin extends javax.swing.JFrame {
+public class Mission extends javax.swing.JFrame {
     
     
-        protected String id;
-    protected String nom ;
-    protected String prénom ;
-    protected String login ;
-    protected String password ;
-    protected int role ;
-    private boolean selected;
+        
+    //private boolean selected;
     static JFrame f;
         
         
-    public void setId(String id) {
-        this.id = id;
-    }
-
-   public void setnom(String nom) {
-        this.nom = nom;
-    }
-
-     public void setprénom(String prénom) {
-        this.prénom = prénom;
-    }
-      public void setlogin(String login) {
-        this.login = login;
-    }
-       public void setpassword(String password) {
-        this.password = password;
-    }
-     public String getId() {
-        return id;
-    }
-
-    public String getnom() {
-        return nom;
-    }
-    
-      public String getprénom() {
-        return prénom;
-    }
-        public String getlogin() {
-        return login;
-    }
-          public String getpassword() {
-        return password;
-    }
-        
+   
+  
        
     /**
      * Creates new form acceuil
      */
-    public Admin() {
+    public Mission() {
         initComponents();
         try {
             connection connect = new connection();
@@ -86,20 +48,17 @@ public class Admin extends javax.swing.JFrame {
            
      
               // 0 condicteur 1 administrateur
-        connect.myRes = connect.myst.executeQuery("select * from persone where `role` = 1");
+        connect.myRes = connect.myst.executeQuery("select id,isArrived,date_depart,date_arriver,id_conducteur,id_ville_depart, id_ville_arriver from mission ");
             while(connect.myRes.next()){
                 String id = String.valueOf(connect.myRes.getString("id"));
-                String nom = String.valueOf(connect.myRes.getString("nom"));                
-                String prenom = String.valueOf(connect.myRes.getString("prenom"));                
-                String login = String.valueOf(connect.myRes.getString("login"));                
-                String password = String.valueOf(connect.myRes.getString("password"));
-                String roleToShow = "Administrateur";
+                String isArrived = String.valueOf(connect.myRes.getString("isArrived"));                
+                String date_depart = String.valueOf(connect.myRes.getString("date_depart"));                
+                String date_arriver = String.valueOf(connect.myRes.getString("date_arriver"));                
+                String id_conducteur = String.valueOf(connect.myRes.getString("id_conducteur"));
+                String id_ville_depart = String.valueOf(connect.myRes.getString("id_ville_depart"));
+                String id_ville_arriver = String.valueOf(connect.myRes.getString("id_ville_arriver"));
                 
-
-
-
-                
-                String tbData[] = {id,nom,prenom,login,password,roleToShow};
+                String tbData[] = {id,isArrived,date_depart,date_arriver,id_conducteur,id_ville_depart,id_ville_arriver};
                 System.out.println(tbData);
                 DefaultTableModel tblModel = (DefaultTableModel)jTable.getModel();
                 tblModel.addRow(tbData);
@@ -128,6 +87,8 @@ public class Admin extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
 
         javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
         jDialog1.getContentPane().setLayout(jDialog1Layout);
@@ -155,7 +116,7 @@ public class Admin extends javax.swing.JFrame {
             }
         });
         jPanel2.add(jButton1);
-        jButton1.setBounds(90, 80, 69, 23);
+        jButton1.setBounds(70, 80, 69, 23);
 
         jTable.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -163,7 +124,7 @@ public class Admin extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Id", "Nom", "Prenom", "login", "password", "Role"
+                "Id", "is-Arrived", "Date_départ", "Date_arriver", "Id_Conducteur", "ville_depart", "Ville_arriver"
             }
         ));
         jTable.setFocusable(false);
@@ -182,7 +143,7 @@ public class Admin extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTable);
 
         jPanel2.add(jScrollPane1);
-        jScrollPane1.setBounds(90, 130, 640, 240);
+        jScrollPane1.setBounds(70, 130, 570, 200);
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
         jLabel1.setText("précédent");
@@ -201,7 +162,7 @@ public class Admin extends javax.swing.JFrame {
             }
         });
         jPanel2.add(jLabel2);
-        jLabel2.setBounds(110, 420, 70, 90);
+        jLabel2.setBounds(90, 380, 70, 90);
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javaapplication1/trush.png"))); // NOI18N
         jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -210,7 +171,17 @@ public class Admin extends javax.swing.JFrame {
             }
         });
         jPanel2.add(jLabel4);
-        jLabel4.setBounds(770, 410, 80, 100);
+        jLabel4.setBounds(500, 380, 80, 100);
+
+        jButton2.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jButton2.setText("Suivre le conducteur");
+        jPanel2.add(jButton2);
+        jButton2.setBounds(700, 133, 180, 40);
+
+        jButton3.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jButton3.setText("consommation capter");
+        jPanel2.add(jButton3);
+        jButton3.setBounds(700, 200, 190, 40);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -228,25 +199,7 @@ public class Admin extends javax.swing.JFrame {
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         // TODO add your handling code here:
-        Add_admin adm = new Add_admin();
-        
-        
-            double height = adm.getHeight();
-             double width = adm.getWidth();
-             Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-                double widthscreen = screenSize.getWidth();               
-                double heightscreen = screenSize.getHeight();
-
-             
-            
-             int north =  (int)((widthscreen - width)/2);             
-             int heightMiddel =  (int)((heightscreen - height)/2);
-
-             adm.setLocation(north, heightMiddel);
-        
-        adm.setVisible(true);
-        this.dispose();
-        
+       
             
     }//GEN-LAST:event_jButton1MouseClicked
 
@@ -276,48 +229,13 @@ public class Admin extends javax.swing.JFrame {
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
         // TODO add your handling code here:
         
-        Update_Adm u = new Update_Adm(this.id,this.nom,this.prénom,this.login, this.password);
-        
-         double height = u.getHeight();
-             double width = u.getWidth();
-             Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-                double widthscreen = screenSize.getWidth();               
-                double heightscreen = screenSize.getHeight();
-
-             
-            
-             int north =  (int)((widthscreen - width)/2);             
-             int heightMiddel =  (int)((heightscreen - height)/2);
-
-             u.setLocation(north, heightMiddel);
-            
-
-
-             if(this.selected){
-                  
-                 u.setVisible(true);
-                 this.dispose();
-             }else{
-                System.out.print("Merci de selectioné....");
-             }
-       
         
     }//GEN-LAST:event_jLabel2MouseClicked
 
     private void jTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableMouseClicked
         // TODO add your handling code here:
         
-        DefaultTableModel model = (DefaultTableModel) jTable.getModel();
-        int selectedrow = jTable.getSelectedRow();
-        
-        
-        this.setId(model.getValueAt(selectedrow, 0).toString());        
-        this.setnom( model.getValueAt(selectedrow, 1).toString());
-        this.setprénom( model.getValueAt(selectedrow, 2).toString());
-        this.setlogin( model.getValueAt(selectedrow, 3).toString());
-        this.setpassword( model.getValueAt(selectedrow, 4).toString());
-        this.role=1;
-        this.selected = true;
+       
             
         
      
@@ -328,48 +246,6 @@ public class Admin extends javax.swing.JFrame {
         
         
         
-        try {
-                 connection connect = new connection();
-                    connect.connectionDb();
-                    
-                    String sql = "DELETE FROM `persone` WHERE `id`= ?";
- 
-                    PreparedStatement statement = connect.myconnection.prepareStatement(sql);
-                    statement.setString(1, this.id);                      
-                    
-
-                    int rowsInserted = statement.executeUpdate();
-                 
-                      DefaultTableModel dm = (DefaultTableModel) this.jTable.getModel();
-                      int rowCount = dm.getRowCount();
-                      //Remove rows one by one from the end of the table
-                      for (int i = rowCount - 1; i >= 0; i--) {
-                          dm.removeRow(i);
-                      }
-                          
-                          
-                          
-                    connect.myRes = connect.myst.executeQuery("select * from persone where `role` = 1 ");
-                   
-                    while(connect.myRes.next()){
-                        String id = String.valueOf(connect.myRes.getString("id"));
-                        String nom = String.valueOf(connect.myRes.getString("nom"));
-                        String prenom = String.valueOf(connect.myRes.getString("prenom"));
-                        String login = String.valueOf(connect.myRes.getString("login"));
-                        String password = String.valueOf(connect.myRes.getString("password"));
-                        String roleToShow = "Administrateur";
-
-                        String tbData[] = {id,nom,prenom,login,password,roleToShow};
-                        DefaultTableModel tblModel = (DefaultTableModel)this.jTable.getModel();
-                        tblModel.addRow(tbData);
-                    }
-         
-            
-              
-            } catch (SQLException ex) {
-                Logger.getLogger(Update_Adm.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        
     }//GEN-LAST:event_jLabel4MouseClicked
 
     /**
@@ -379,6 +255,8 @@ public class Admin extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
