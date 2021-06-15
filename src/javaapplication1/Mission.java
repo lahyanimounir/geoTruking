@@ -5,17 +5,31 @@
  */
 package javaapplication1;
 
+import com.teamdev.jxbrowser.browser.Browser;
+import com.teamdev.jxbrowser.dom.InputElement;
+import com.teamdev.jxbrowser.engine.Engine;
+import com.teamdev.jxbrowser.engine.EngineOptions;
+import static com.teamdev.jxbrowser.engine.RenderingMode.HARDWARE_ACCELERATED;
+import com.teamdev.jxbrowser.frame.Frame;
+import com.teamdev.jxbrowser.navigation.Navigation;
+import com.teamdev.jxbrowser.navigation.event.FrameDocumentLoadFinished;
+import com.teamdev.jxbrowser.view.swing.BrowserView;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.io.IOException;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -29,7 +43,8 @@ public class Mission extends javax.swing.JFrame {
     //private boolean selected;
     static JFrame f;
         
-        
+               static ConfigSocket soc = new ConfigSocket();
+
    
   
        
@@ -180,6 +195,11 @@ public class Mission extends javax.swing.JFrame {
 
         jButton2.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jButton2.setText("Suivre le conducteur");
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton2MouseClicked(evt);
+            }
+        });
         jPanel2.add(jButton2);
         jButton2.setBounds(670, 80, 190, 40);
 
@@ -264,6 +284,88 @@ public class Mission extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_jLabel4MouseClicked
+
+    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+        
+        
+
+        String consult = null;
+        try {
+            consult = soc.getSocket("getLocalisation");
+       
+      
+         String lat  = consult.split(",")[0];        
+         String lon = consult.split(",")[1];   
+        // String lat = "35.757628";
+         // String lon = "-5.837260";
+         String consomation = consult.split(",")[2];
+
+         System.out.println(lat);         
+         System.out.println(lon);
+
+
+        // TODO add your handling code here:
+        // Initialize Chromium.
+        JButton button = new JButton("Test Button");
+        Engine engine = Engine.newInstance(
+                EngineOptions.newBuilder(HARDWARE_ACCELERATED)
+                        .licenseKey("6P830J66YB5V28GJ1XVTI3OY4A5QTIPYDTRXV6OVKJWD0GV4TIVLIHIAZC8BTZIQ6MAY")
+                        .build());
+// Create a Browser instance.
+        Browser browser = engine.newBrowser();
+
+        Navigation navigation = browser.navigation();
+
+        SwingUtilities.invokeLater(() -> {
+            JFrame frame = new JFrame("JxBrowser AWT/Swing");
+            frame.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosing(WindowEvent e) {
+                    // Shutdown Chromium and release allocated resources.
+                    engine.close();
+                }
+
+            });
+          
+            // Create and embed Swing BrowserView component to display web content.
+            frame.add(BrowserView.newInstance(browser));
+            frame.setSize(900, 800);
+            frame.setLocationRelativeTo(null);
+            frame.setVisible(true);
+            navigation.loadUrl("E:\\geoTruking\\tt.html");
+            navigation.on(FrameDocumentLoadFinished.class, event -> {
+                Frame frameb = event.frame();
+              
+                frameb.document().ifPresent(document -> {
+                    
+                    
+                    
+                     document.documentElement().ifPresent(documentElement ->{
+                          
+                         //System.out.println(documentElement.findElementsByCssSelector("#firstname"));
+                        
+                        /*  documentElement.findElementsByCssSelector("#lat").forEach(element -> {
+                                System.out.println(element.attributeValue("value"));
+                         });*/
+                  
+                         documentElement.findElementById("lat").ifPresent(element ->
+                                ((InputElement) element).value(lat));
+                         
+                         documentElement.findElementById("lon").ifPresent(element ->
+                                ((InputElement) element).value(lon));
+                       
+                     });
+                });
+            });
+            //browser.navigation().loadUrl("C:\\Users\\user\\Desktop\\angularProject\\jenkis.html");
+
+            // Load the required web page.
+        });
+       // this.dispose();
+        } catch (IOException ex) {
+            Logger.getLogger(Mission.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton2MouseClicked
 
     /**
      * @param args the command line arguments
