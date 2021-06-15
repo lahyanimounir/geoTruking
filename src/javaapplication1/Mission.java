@@ -31,6 +31,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
+import javaapplication1.Pesonne;
+import javaapplication1.Ville;
 
 /**
  *
@@ -39,13 +41,45 @@ import javax.swing.table.DefaultTableModel;
 public class Mission extends javax.swing.JFrame {
     
     
-        
-    //private boolean selected;
+    private String id ;
+    private String isArrived ;
+    private String datedepart;
+    private String datearriver;
+    private String nom;
+     private String prenom;
+     private String villedepart;
+    private String villearriver;
+    private boolean selected;
     static JFrame f;
-        
-               static ConfigSocket soc = new ConfigSocket();
 
-   
+        
+      static ConfigSocket soc = new ConfigSocket();
+
+       public void setId(String id) {
+        this.id = id;
+    }
+      public void setisArrived(String isArrived) {
+        this.isArrived = isArrived;
+    }
+       public void setdate_depart(String date_depart) {
+        this.datedepart = datedepart;
+    }
+     public void setdate_arriver(String date_arriver) {
+        this.datearriver = datearriver;
+    }    
+     public void setnom(String nom) {
+        this.nom = nom;
+    }    
+       public void setprenom(String prenom) {
+        this.prenom = prenom;
+    }    
+         public void setvilledepart(String villedepart) {
+        this.villedepart = villedepart;
+    }    
+           public void setvillearriver(String villearriver) {
+        this.villearriver = villearriver;
+    }  
+
   
        
     /**
@@ -180,6 +214,9 @@ public class Mission extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel2MouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel2MouseEntered(evt);
+            }
         });
         jPanel2.add(jLabel2);
         jLabel2.setBounds(90, 400, 70, 90);
@@ -265,13 +302,48 @@ public class Mission extends javax.swing.JFrame {
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
         // TODO add your handling code here:
-        
+        Update_mission1 m = new Update_mission1(); 
+        double height = m.getHeight();
+             double width = m.getWidth();
+             Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+                double widthscreen = screenSize.getWidth();               
+                double heightscreen = screenSize.getHeight();
+
+             
+            
+             int north =  (int)((widthscreen - width)/2);             
+             int heightMiddel =  (int)((heightscreen - height)/2);
+
+             m.setLocation(north, heightMiddel);
+            
+
+
+             if(this.selected){
+                  
+                 m.setVisible(true);
+                 this.dispose();
+             }else{
+                System.out.print("Merci de selectioné....");
+             }
+       
         
     }//GEN-LAST:event_jLabel2MouseClicked
 
     private void jTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableMouseClicked
         // TODO add your handling code here:
+         DefaultTableModel model = (DefaultTableModel) jTable.getModel();
+        int selectedrow = jTable.getSelectedRow();
         
+         //this.setId(model.getValueAt(selectedrow, 0).toString());        
+ 
+        this.setdate_depart(model.getValueAt(selectedrow, 2).toString());        
+        this.setdate_arriver( model.getValueAt(selectedrow,3).toString());
+        /*this.setnom(model.getValueAt(selectedrow, 4).toString());        
+        this.setprenom( model.getValueAt(selectedrow,5).toString());
+        this.setvilledepart(model.getValueAt(selectedrow, 6).toString());        
+        this.setvillearriver( model.getValueAt(selectedrow,7).toString());*/
+        
+        this.selected = true;
        
             
         
@@ -280,10 +352,52 @@ public class Mission extends javax.swing.JFrame {
 
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
         // TODO add your handling code here:
-        
+         try {
+                 connection connect = new connection();
+                    connect.connectionDb();
+                    
+                    String sql = "DELETE FROM `mission` WHERE `id`= ?";
+ 
+                    PreparedStatement statement = connect.myconnection.prepareStatement(sql);
+                    statement.setString(1, this.id);                      
+                    
+
+                    int rowsInserted = statement.executeUpdate();
+                 
+                      DefaultTableModel dm = (DefaultTableModel) this.jTable.getModel();
+                      int rowCount = dm.getRowCount();
+                      //Remove rows one by one from the end of the table
+                      for (int i = rowCount - 1; i >= 0; i--) {
+                          dm.removeRow(i);
+                      }
+                        connect.myRes = connect.myst.executeQuery("SELECT mission.id, camion.immatriculation, persone.nom, persone.prenom, persone.login, persone.password, mission.id_conducteur, mission.date_depart, mission.date_arriver, suivi.id_camion, suivi.id_mission, mission.consommation_capter, mission.isArrived, persone.role, (SELECT ville.nom FROM ville WHERE mission.id_ville_depart = ville.id) AS ville_depart, (SELECT ville.nom FROM ville WHERE mission.id_ville_arriver = ville.id) AS ville_arriver,mission.id_ville_arriver FROM mission LEFT OUTER JOIN suivi ON (suivi.id_mission = mission.id) LEFT OUTER JOIN persone ON (mission.id_conducteur = persone.id) LEFT OUTER JOIN camion ON (camion.id = suivi.id_camion)");
+            while(connect.myRes.next()){
+                String id = String.valueOf(connect.myRes.getString("mission.id"));
+                String isArrived = String.valueOf(connect.myRes.getString("mission.isArrived"));                
+                String date_depart = String.valueOf(connect.myRes.getString("mission.date_depart"));                
+                String date_arriver = String.valueOf(connect.myRes.getString("mission.date_arriver"));                
+                String nom = String.valueOf(connect.myRes.getString("persone.nom"));                
+                String prenom = String.valueOf(connect.myRes.getString("persone.prenom"));
+                String ville_depart = String.valueOf(connect.myRes.getString("ville_depart"));
+                String ville_arriver = String.valueOf(connect.myRes.getString("ville_arriver"));                
+                String immatriculation = String.valueOf(connect.myRes.getString("camion.immatriculation"));                
+                String consommation_capter = String.valueOf(connect.myRes.getString("mission.consommation_capter"));
+
+
+                
+
+                String tbData[] = {id,isArrived,date_depart,date_arriver,nom,prenom,ville_depart,ville_arriver,immatriculation,consommation_capter};
+                System.out.println(tbData);
+                DefaultTableModel tblModel = (DefaultTableModel)jTable.getModel();
+                tblModel.addRow(tbData);
+            }   
+                       } catch (SQLException ex) {
+                Logger.getLogger(Update_mission1.class.getName()).log(Level.SEVERE, null, ex);
+            }    
         
         
     }//GEN-LAST:event_jLabel4MouseClicked
+
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
         
@@ -366,6 +480,11 @@ public class Mission extends javax.swing.JFrame {
             Logger.getLogger(Mission.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton2MouseClicked
+
+    private void jLabel2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel2MouseEntered
+
 
     /**
      * @param args the command line arguments
