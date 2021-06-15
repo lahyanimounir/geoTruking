@@ -26,7 +26,7 @@ public class Ville extends javax.swing.JFrame {
     
     
         private String id;
-        private String ville;
+        public String ville;
         private boolean selected;
         static JFrame f;
         
@@ -35,7 +35,7 @@ public class Ville extends javax.swing.JFrame {
         this.id = id;
     }
 
-    public void setVille(String ville) {
+    public  void setVille(String ville) {
         this.ville = ville;
     }
 

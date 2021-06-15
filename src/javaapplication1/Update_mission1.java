@@ -8,8 +8,8 @@ package javaapplication1;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.sql.Date;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,12 +19,35 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author user
  */
-public class Add_mission extends javax.swing.JFrame {
+public class Update_mission1 extends javax.swing.JFrame {
 
+    private String id;
+     private String datedepart;
+    private String datearriver;
+    private String nom;
+     private String prenom;
+     private String villedepart;
+    private String villearriver;
     /**
      * Creates new form Add_mission
+     * @param id     
      */
-    public Add_mission() {
+    /*public Update_mission1(String datedepart,String datearriver){
+           this.id = id;
+         this.datedepart = datedepart;
+         this.datearriver = datearriver;
+         /*this.nom = nom;
+         this.prenom = prenom;
+         this.villedepart = villedepart;
+         this.villearriver = villearriver;
+        
+          initComponents();
+          this.date_depart.setText(this.datedepart);
+          this.date_arriver.setText(this.datearriver);
+          
+    
+    }*/
+    public Update_mission1() {
         initComponents();
         
         
@@ -39,7 +62,7 @@ public class Add_mission extends javax.swing.JFrame {
                 String id = String.valueOf(connect.myRes.getString("id"));
                 String nom = String.valueOf(connect.myRes.getString("nom"));
                 
-                conducteur.addItem(id+","+nom);
+                conducteur1.addItem(id+","+nom);
                 
             }
              } catch (SQLException e) {
@@ -84,23 +107,20 @@ public class Add_mission extends javax.swing.JFrame {
              } catch (SQLException e) {
             System.out.println(e);
         }
-       try {
-            connection connect = new connection();
+              try {
+                  connection connect = new connection();
             connect.connectionDb();
-          
-            
-              
-        connect.myRes = connect.myst.executeQuery("select * from camion ");
+              connect.myRes = connect.myst.executeQuery("select * from camion ");
             while(connect.myRes.next()){
                 String id = String.valueOf(connect.myRes.getString("id"));
                 String immatriculation = String.valueOf(connect.myRes.getString("immatriculation"));
                 
-                camion_s.addItem(id+","+immatriculation);
+                camion.addItem(id+","+immatriculation);
                 
             }
              } catch (SQLException e) {
             System.out.println(e);
-        }        
+        }  
     }
 
     /**
@@ -121,13 +141,13 @@ public class Add_mission extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         date_depart = new javax.swing.JTextField();
         date_arriver = new javax.swing.JTextField();
-        conducteur = new javax.swing.JComboBox<>();
+        camion = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         ville_depart = new javax.swing.JComboBox<>();
         ville_arriver = new javax.swing.JComboBox<>();
         jLabel9 = new javax.swing.JLabel();
-        camion_s = new javax.swing.JComboBox<>();
+        conducteur1 = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
 
         jLabel7.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
@@ -166,8 +186,13 @@ public class Add_mission extends javax.swing.JFrame {
         jPanel1.add(date_arriver);
         date_arriver.setBounds(220, 140, 350, 30);
 
-        jPanel1.add(conducteur);
-        conducteur.setBounds(220, 320, 350, 30);
+        camion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                camionActionPerformed(evt);
+            }
+        });
+        jPanel1.add(camion);
+        camion.setBounds(220, 380, 350, 30);
 
         jLabel8.setText("Précedent");
         jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -201,15 +226,15 @@ public class Add_mission extends javax.swing.JFrame {
         jLabel9.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jLabel9.setText("Camion");
         jPanel1.add(jLabel9);
-        jLabel9.setBounds(120, 380, 50, 14);
+        jLabel9.setBounds(120, 384, 50, 20);
 
-        camion_s.addActionListener(new java.awt.event.ActionListener() {
+        conducteur1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                camion_sActionPerformed(evt);
+                conducteur1ActionPerformed(evt);
             }
         });
-        jPanel1.add(camion_s);
-        camion_s.setBounds(220, 370, 350, 30);
+        jPanel1.add(conducteur1);
+        conducteur1.setBounds(220, 320, 350, 30);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javaapplication1/bg3.png"))); // NOI18N
         jPanel1.add(jLabel1);
@@ -232,20 +257,7 @@ public class Add_mission extends javax.swing.JFrame {
     private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
         // TODO add your handling code here:
 
-        Pesonne P = new Pesonne();
-        double height = P.getHeight();
-        double width = P.getWidth();
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        double widthscreen = screenSize.getWidth();
-        double heightscreen = screenSize.getHeight();
-
-        int north =  (int)((widthscreen - width)/2);
-        int heightMiddel =  (int)((heightscreen - height)/2);
-
-        P.setLocation(north, heightMiddel);
-
-        P.setVisible(true);
-        this.dispose();
+       
     }//GEN-LAST:event_jLabel7MouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -275,37 +287,26 @@ public class Add_mission extends javax.swing.JFrame {
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         // TODO add your handling code here:
-        String ville_arriver_s = ville_arriver.getSelectedItem().toString();        
-        String ville_depart_s = ville_depart.getSelectedItem().toString();        
-        String conducteur_s = conducteur.getSelectedItem().toString();        
-        String date_depart_s = date_depart.getText().toString();        
-        String date_arriver_s = date_arriver.getText().toString();
-        String  mat = camion_s.getSelectedItem().toString();
+     
+        
         
             //conducteur_s.split(",")[0]
             try {
                  connection connect = new connection();
                     connect.connectionDb();
-String sql = "INSERT INTO `mission`(`date_depart`,`date_arriver`,`id_conducteur`,`id_ville_depart`,`id_ville_arriver`) VALUES (?,?,?,?,?)";
+String sql = "UPDATE `mission` SET `date_depart`=?,`date_arriver`=?,`id_conducteur`=?,`id_ville_depart`=?,`id_ville_arriver`=?  WHERE `id`=?";
     System.out.println(sql);    
-    System.out.println(conducteur_s);
-    System.out.println(date_depart_s);    
-    System.out.println(date_arriver_s);
-    System.out.println(mat);
+   
 
                     PreparedStatement statement = connect.myconnection.prepareStatement(sql);
-                     statement.setString(1, date_depart_s);
-                    statement.setString(2, date_arriver_s);
-                    statement.setString(3, conducteur_s.split(",")[0]);
-                    statement.setString(4, ville_depart_s.split(",")[0]);       
-                    statement.setString(5, ville_arriver_s.split(",")[0]);
-                    
+                    statement.setString(1, date_depart.getText());  
+                    statement.setString(2, date_arriver.getText()); 
+                    statement.setString(3, (String) conducteur1.getSelectedItem());
+                    statement.setString(4, (String) ville_depart.getSelectedItem());       
+                    statement.setString(5, (String) ville_arriver.getSelectedItem());
+                    statement.setString(6, this.id);
                     int rowsInserted = statement.executeUpdate();
-                  
-                
                     if (rowsInserted > 0) {
-                        this.insert_suivi(conducteur_s.split(",")[0]);
-                        
                         Mission mission = new Mission();
                         double height = mission.getHeight();
                              double width = mission.getWidth();
@@ -326,46 +327,28 @@ String sql = "INSERT INTO `mission`(`date_depart`,`date_arriver`,`id_conducteur`
             
               
             } catch (SQLException ex) {
-                Logger.getLogger(Add_mission.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Update_mission1.class.getName()).log(Level.SEVERE, null, ex);
             }
 
         
     }//GEN-LAST:event_jButton1MouseClicked
-private void insert_suivi(String id_camion){
-    System.out.println("dkhalet");
- try {   connection connect = new connection();
-            connect.connectionDb();
-        connect.myRes = connect.myst.executeQuery("SELECT MAX(id) AS id FROM mission");
-            
-                String id_mission= String.valueOf(connect.myRes.getString("id"));
-                System.out.println(id_mission+"bbbb");
-         /*String sql="INSERT INTO `suivi`(`id_camion`, `id_mission`) VALUES (?,?)";
-         PreparedStatement statement = connect.myconnection.prepareStatement(sql);
-                  statement.setString(1, id_mission);
-                    statement.setString(2, id_ca_m);*/
-                
-             } catch (SQLException e) {
-            System.out.println(e);
-        }  
 
-
-}
-    
-    
-    
-    
-    private void camion_sActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_camion_sActionPerformed
+    private void camionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_camionActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_camion_sActionPerformed
+    }//GEN-LAST:event_camionActionPerformed
+
+    private void conducteur1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_conducteur1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_conducteur1ActionPerformed
 
     /**
      * @param args the command line arguments
      */
-  
-    
+ 
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> camion_s;
-    private javax.swing.JComboBox<String> conducteur;
+    private javax.swing.JComboBox<String> camion;
+    private javax.swing.JComboBox<String> conducteur1;
     private javax.swing.JTextField date_arriver;
     private javax.swing.JTextField date_depart;
     private javax.swing.JButton jButton1;
