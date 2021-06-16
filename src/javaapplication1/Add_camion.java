@@ -58,6 +58,8 @@ public class Add_camion extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         Matricule = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -84,7 +86,7 @@ public class Add_camion extends javax.swing.JFrame {
             }
         });
         jPanel1.add(Matricule);
-        Matricule.setBounds(120, 90, 210, 30);
+        Matricule.setBounds(170, 90, 210, 30);
 
         jButton1.setText("Ajouter");
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -92,8 +94,25 @@ public class Add_camion extends javax.swing.JFrame {
                 jButton1MouseClicked(evt);
             }
         });
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton1);
-        jButton1.setBounds(260, 170, 73, 23);
+        jButton1.setBounds(310, 230, 73, 23);
+
+        jLabel4.setText("Adresse Mac du capteur");
+        jPanel1.add(jLabel4);
+        jLabel4.setBounds(20, 160, 130, 40);
+
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jTextField1);
+        jTextField1.setBounds(170, 160, 210, 30);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javaapplication1/bg3.jpg"))); // NOI18N
         jPanel1.add(jLabel1);
@@ -123,10 +142,12 @@ public class Add_camion extends javax.swing.JFrame {
          try {
                  connection connect = new connection();
                     connect.connectionDb();
-                    String sql = "INSERT INTO `camion`(`immatriculation`) VALUES (?)";
+                    String sql = "INSERT INTO `camion`(`immatriculation`,`mac`) VALUES (?,?)";
  
                     PreparedStatement statement = connect.myconnection.prepareStatement(sql);
                     statement.setString(1, Matricule.getText());
+                    statement.setString(2, jTextField1.getText());
+
                     int rowsInserted = statement.executeUpdate();
                     if (rowsInserted > 0) {
                         Camion camion = new Camion();
@@ -175,6 +196,14 @@ public class Add_camion extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jLabel2MouseClicked
 
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -185,6 +214,8 @@ public class Add_camion extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

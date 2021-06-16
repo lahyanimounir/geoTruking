@@ -344,7 +344,7 @@ public class Pesonne extends javax.swing.JFrame {
                           
                           
                           
-                    connect.myRes = connect.myst.executeQuery("select * from persone WHERE 'role'=0");
+                    connect.myRes = connect.myst.executeQuery("select * from persone WHERE `role`= '0'");
                    
                     while(connect.myRes.next()){
                         String id = String.valueOf(connect.myRes.getString("id"));

@@ -48,6 +48,8 @@ public class Update_camion extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         Matricule = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -67,7 +69,7 @@ public class Update_camion extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
         jLabel3.setText("Matricule");
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(20, 110, 80, 20);
+        jLabel3.setBounds(20, 90, 80, 20);
 
         Matricule.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -75,7 +77,7 @@ public class Update_camion extends javax.swing.JFrame {
             }
         });
         jPanel1.add(Matricule);
-        Matricule.setBounds(120, 100, 250, 40);
+        Matricule.setBounds(130, 80, 250, 40);
 
         jButton1.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
         jButton1.setText("Enregistrer ");
@@ -85,7 +87,19 @@ public class Update_camion extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButton1);
-        jButton1.setBounds(250, 170, 110, 30);
+        jButton1.setBounds(270, 230, 110, 30);
+
+        jLabel4.setText("Adresse Mac Capteur");
+        jPanel1.add(jLabel4);
+        jLabel4.setBounds(10, 160, 120, 40);
+
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jTextField1);
+        jTextField1.setBounds(130, 160, 250, 40);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javaapplication1/bg3.png"))); // NOI18N
         jPanel1.add(jLabel1);
@@ -95,11 +109,11 @@ public class Update_camion extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 298, Short.MAX_VALUE)
         );
 
         pack();
@@ -135,11 +149,13 @@ public class Update_camion extends javax.swing.JFrame {
                  connection connect = new connection();
                     connect.connectionDb();
                     
-                    String sql = "UPDATE `camion` SET `immatriculation`=? WHERE `id`=?";
+                    String sql = "UPDATE `camion` SET `immatriculation`=? , `mac`=? WHERE `id`=?";
  
                     PreparedStatement statement = connect.myconnection.prepareStatement(sql);
                     statement.setString(1, Matricule.getText());                    
-                    statement.setString(2, this.id);                    
+                    statement.setString(2, jTextField1.getText());                    
+                    
+                    statement.setString(3, this.id);                    
                     
 
                     int rowsInserted = statement.executeUpdate();
@@ -169,6 +185,10 @@ public class Update_camion extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButton1MouseClicked
 
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -180,6 +200,8 @@ public class Update_camion extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

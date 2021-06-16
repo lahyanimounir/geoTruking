@@ -302,8 +302,10 @@ String sql = "INSERT INTO `mission`(`date_depart`,`date_arriver`,`id_conducteur`
                     
                     int rowsInserted = statement.executeUpdate();
                   
+                   
                 
                     if (rowsInserted > 0) {
+                        System.out.print(conducteur_s.split(",")[0]+"hna tah rial");
                         this.insert_suivi(conducteur_s.split(",")[0]);
                         
                         Mission mission = new Mission();
@@ -332,18 +334,23 @@ String sql = "INSERT INTO `mission`(`date_depart`,`date_arriver`,`id_conducteur`
         
     }//GEN-LAST:event_jButton1MouseClicked
 private void insert_suivi(String id_camion){
-    System.out.println("dkhalet");
+  
+    String id_mission = null;
  try {   connection connect = new connection();
             connect.connectionDb();
+             
+
         connect.myRes = connect.myst.executeQuery("SELECT MAX(id) AS id FROM mission");
-            
-                String id_mission= String.valueOf(connect.myRes.getString("id"));
-                System.out.println(id_mission+"bbbb");
-         /*String sql="INSERT INTO `suivi`(`id_camion`, `id_mission`) VALUES (?,?)";
+             while(connect.myRes.next()){
+                 id_mission= String.valueOf(connect.myRes.getString("id"));
+               
+            }
+                   
+         String sql="INSERT INTO `suivi`(`id_camion`, `id_mission`) VALUES (?,?)";
          PreparedStatement statement = connect.myconnection.prepareStatement(sql);
-                  statement.setString(1, id_mission);
-                    statement.setString(2, id_ca_m);*/
-                
+                  statement.setString(1, id_camion);
+                    statement.setString(2, id_mission);
+                 int rowsInserted = statement.executeUpdate();
              } catch (SQLException e) {
             System.out.println(e);
         }  

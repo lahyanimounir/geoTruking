@@ -144,6 +144,11 @@ public class Add_admin extends javax.swing.JFrame {
         con_pwd.setBounds(220, 250, 160, 30);
 
         jButton1.setText("Ajouter");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
         jPanel2.add(jButton1);
         jButton1.setBounds(440, 350, 73, 23);
 
@@ -170,7 +175,7 @@ public class Add_admin extends javax.swing.JFrame {
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
         // TODO add your handling code here:
         
-        Pesonne P = new Pesonne();
+        Admin P = new Admin();
         double height = P.getHeight();
              double width = P.getWidth();
              Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -196,6 +201,12 @@ public class Add_admin extends javax.swing.JFrame {
     private void con_preActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_con_preActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_con_preActionPerformed
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        // TODO add your handling code here:
+        
+        
+    }//GEN-LAST:event_jButton1MouseClicked
 
     /**
      * @param args the command line arguments
