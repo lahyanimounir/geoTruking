@@ -5,7 +5,7 @@
  */
 package javaapplication1;
 
-import com.teamdev.jxbrowser.browser.Browser;
+/*import com.teamdev.jxbrowser.browser.Browser;
 import com.teamdev.jxbrowser.dom.InputElement;
 import com.teamdev.jxbrowser.engine.Engine;
 import com.teamdev.jxbrowser.engine.EngineOptions;
@@ -13,7 +13,7 @@ import static com.teamdev.jxbrowser.engine.RenderingMode.HARDWARE_ACCELERATED;
 import com.teamdev.jxbrowser.frame.Frame;
 import com.teamdev.jxbrowser.navigation.Navigation;
 import com.teamdev.jxbrowser.navigation.event.FrameDocumentLoadFinished;
-import com.teamdev.jxbrowser.view.swing.BrowserView;
+import com.teamdev.jxbrowser.view.swing.BrowserView;*/
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -104,10 +104,10 @@ public class Mission extends javax.swing.JFrame {
            
      
               // 0 condicteur 1 administrateur
-        connect.myRes = connect.myst.executeQuery("SELECT mission.id, camion.immatriculation, persone.nom, persone.prenom, persone.login, persone.password, mission.id_conducteur, mission.date_depart, mission.date_arriver, suivi.id_camion, suivi.id_mission, mission.consommation_capter, mission.isArrived, persone.role, (SELECT ville.nom FROM ville WHERE mission.id_ville_depart = ville.id) AS ville_depart, (SELECT ville.nom FROM ville WHERE mission.id_ville_arriver = ville.id) AS ville_arriver,mission.id_ville_arriver FROM mission LEFT OUTER JOIN suivi ON (suivi.id_mission = mission.id) LEFT OUTER JOIN persone ON (mission.id_conducteur = persone.id) LEFT OUTER JOIN camion ON (camion.id = suivi.id_camion)");
+        connect.myRes = connect.myst.executeQuery("SELECT mission.id, camion.immatriculation, persone.nom, persone.prenom, persone.login, persone.password, mission.id_conducteur, mission.date_depart, mission.date_arriver, suivi.id_camion, suivi.id_mission, mission.consommation_capter, persone.role, (SELECT ville.nom FROM ville WHERE mission.id_ville_depart = ville.id) AS ville_depart, (SELECT ville.nom FROM ville WHERE mission.id_ville_arriver = ville.id) AS ville_arriver,mission.id_ville_arriver FROM mission LEFT OUTER JOIN suivi ON (suivi.id_mission = mission.id) LEFT OUTER JOIN persone ON (mission.id_conducteur = persone.id) LEFT OUTER JOIN camion ON (camion.id = suivi.id_camion)");
             while(connect.myRes.next()){
                 String id = String.valueOf(connect.myRes.getString("mission.id"));
-                String isArrived = String.valueOf(connect.myRes.getString("mission.isArrived"));                
+                //String isArrived = String.valueOf(connect.myRes.getString("mission.isArrived"));                
                 String date_depart = String.valueOf(connect.myRes.getString("mission.date_depart"));                
                 String date_arriver = String.valueOf(connect.myRes.getString("mission.date_arriver"));                
                 String nom = String.valueOf(connect.myRes.getString("persone.nom"));                
@@ -120,7 +120,7 @@ public class Mission extends javax.swing.JFrame {
 
                 
 
-                String tbData[] = {id,isArrived,date_depart,date_arriver,nom,prenom,ville_depart,ville_arriver,immatriculation,consommation_capter};
+                String tbData[] = {id,date_depart,date_arriver,nom,prenom,ville_depart,ville_arriver,immatriculation,consommation_capter};
                 System.out.println(tbData);
                 DefaultTableModel tblModel = (DefaultTableModel)jTable.getModel();
                 tblModel.addRow(tbData);
@@ -149,6 +149,7 @@ public class Mission extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
         jDialog1.getContentPane().setLayout(jDialog1Layout);
@@ -184,7 +185,7 @@ public class Mission extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Id", "is-Arrived", "Date_départ", "Date_arriver", "Nom", "Prenom", "ville_depart", "Ville_arriver", "matricule", "Consomation"
+                "Id", "Date_départ", "Date_arriver", "Nom", "Prenom", "ville_depart", "Ville_arriver", "matricule", "Consomation"
             }
         ));
         jTable.setFocusable(false);
@@ -222,7 +223,7 @@ public class Mission extends javax.swing.JFrame {
             }
         });
         jPanel2.add(jLabel4);
-        jLabel4.setBounds(780, 390, 80, 100);
+        jLabel4.setBounds(90, 350, 80, 100);
 
         jButton2.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jButton2.setText("Suivre le conducteur");
@@ -234,11 +235,15 @@ public class Mission extends javax.swing.JFrame {
         jPanel2.add(jButton2);
         jButton2.setBounds(670, 80, 190, 40);
 
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javaapplication1/bg3.png"))); // NOI18N
+        jPanel2.add(jLabel2);
+        jLabel2.setBounds(0, 0, 920, 580);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 919, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 919, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -339,10 +344,10 @@ public class Mission extends javax.swing.JFrame {
                       for (int i = rowCount - 1; i >= 0; i--) {
                           dm.removeRow(i);
                       }
-                        connect.myRes = connect.myst.executeQuery("SELECT mission.id, camion.immatriculation, persone.nom, persone.prenom, persone.login, persone.password, mission.id_conducteur, mission.date_depart, mission.date_arriver, suivi.id_camion, suivi.id_mission, mission.consommation_capter, mission.isArrived, persone.role, (SELECT ville.nom FROM ville WHERE mission.id_ville_depart = ville.id) AS ville_depart, (SELECT ville.nom FROM ville WHERE mission.id_ville_arriver = ville.id) AS ville_arriver,mission.id_ville_arriver FROM mission LEFT OUTER JOIN suivi ON (suivi.id_mission = mission.id) LEFT OUTER JOIN persone ON (mission.id_conducteur = persone.id) LEFT OUTER JOIN camion ON (camion.id = suivi.id_camion)");
+                        connect.myRes = connect.myst.executeQuery("SELECT mission.id, camion.immatriculation, persone.nom, persone.prenom, persone.login, persone.password, mission.id_conducteur, mission.date_depart, mission.date_arriver, suivi.id_camion, suivi.id_mission, mission.consommation_capter, persone.role, (SELECT ville.nom FROM ville WHERE mission.id_ville_depart = ville.id) AS ville_depart, (SELECT ville.nom FROM ville WHERE mission.id_ville_arriver = ville.id) AS ville_arriver,mission.id_ville_arriver FROM mission LEFT OUTER JOIN suivi ON (suivi.id_mission = mission.id) LEFT OUTER JOIN persone ON (mission.id_conducteur = persone.id) LEFT OUTER JOIN camion ON (camion.id = suivi.id_camion)");
             while(connect.myRes.next()){
                 String id = String.valueOf(connect.myRes.getString("mission.id"));
-                String isArrived = String.valueOf(connect.myRes.getString("mission.isArrived"));                
+               // String isArrived = String.valueOf(connect.myRes.getString("mission.isArrived"));                
                 String date_depart = String.valueOf(connect.myRes.getString("mission.date_depart"));                
                 String date_arriver = String.valueOf(connect.myRes.getString("mission.date_arriver"));                
                 String nom = String.valueOf(connect.myRes.getString("persone.nom"));                
@@ -355,7 +360,7 @@ public class Mission extends javax.swing.JFrame {
 
                 
 
-                String tbData[] = {id,isArrived,date_depart,date_arriver,nom,prenom,ville_depart,ville_arriver,immatriculation,consommation_capter};
+                String tbData[] = {id,date_depart,date_arriver,nom,prenom,ville_depart,ville_arriver,immatriculation,consommation_capter};
                 System.out.println(tbData);
                 DefaultTableModel tblModel = (DefaultTableModel)jTable.getModel();
                 tblModel.addRow(tbData);
@@ -367,7 +372,7 @@ public class Mission extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jLabel4MouseClicked
 
-
+/*
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
         
         
@@ -437,7 +442,7 @@ public class Mission extends javax.swing.JFrame {
                         /*  documentElement.findElementsByCssSelector("#lat").forEach(element -> {
                                 System.out.println(element.attributeValue("value"));
                          });*/
-                  
+                  /*
                          documentElement.findElementById("lat").ifPresent(element ->
                                 ((InputElement) element).value(lat));
                          
@@ -456,7 +461,7 @@ public class Mission extends javax.swing.JFrame {
             Logger.getLogger(Mission.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton2MouseClicked
-    
+    */
     private void updateConsomation(String consomation){
     
         
@@ -483,10 +488,10 @@ public class Mission extends javax.swing.JFrame {
                       for (int i = rowCount - 1; i >= 0; i--) {
                           dm.removeRow(i);
                       }
-                        connect.myRes = connect.myst.executeQuery("SELECT mission.id, camion.immatriculation, persone.nom, persone.prenom, persone.login, persone.password, mission.id_conducteur, mission.date_depart, mission.date_arriver, suivi.id_camion, suivi.id_mission, mission.consommation_capter, mission.isArrived, persone.role, (SELECT ville.nom FROM ville WHERE mission.id_ville_depart = ville.id) AS ville_depart, (SELECT ville.nom FROM ville WHERE mission.id_ville_arriver = ville.id) AS ville_arriver,mission.id_ville_arriver FROM mission LEFT OUTER JOIN suivi ON (suivi.id_mission = mission.id) LEFT OUTER JOIN persone ON (mission.id_conducteur = persone.id) LEFT OUTER JOIN camion ON (camion.id = suivi.id_camion)");
+                        connect.myRes = connect.myst.executeQuery("SELECT mission.id, camion.immatriculation, persone.nom, persone.prenom, persone.login, persone.password, mission.id_conducteur, mission.date_depart, mission.date_arriver, suivi.id_camion, suivi.id_mission, mission.consommation_capter, persone.role, (SELECT ville.nom FROM ville WHERE mission.id_ville_depart = ville.id) AS ville_depart, (SELECT ville.nom FROM ville WHERE mission.id_ville_arriver = ville.id) AS ville_arriver,mission.id_ville_arriver FROM mission LEFT OUTER JOIN suivi ON (suivi.id_mission = mission.id) LEFT OUTER JOIN persone ON (mission.id_conducteur = persone.id) LEFT OUTER JOIN camion ON (camion.id = suivi.id_camion)");
                             while(connect.myRes.next()){
                                 String id = String.valueOf(connect.myRes.getString("mission.id"));
-                                String isArrived = String.valueOf(connect.myRes.getString("mission.isArrived"));                
+                                //String isArrived = String.valueOf(connect.myRes.getString("mission.isArrived"));                
                                 String date_depart = String.valueOf(connect.myRes.getString("mission.date_depart"));                
                                 String date_arriver = String.valueOf(connect.myRes.getString("mission.date_arriver"));                
                                 String nom = String.valueOf(connect.myRes.getString("persone.nom"));                
@@ -499,7 +504,7 @@ public class Mission extends javax.swing.JFrame {
 
 
 
-                                String tbData[] = {id,isArrived,date_depart,date_arriver,nom,prenom,ville_depart,ville_arriver,immatriculation,consommation_capter};
+                                String tbData[] = {id,date_depart,date_arriver,nom,prenom,ville_depart,ville_arriver,immatriculation,consommation_capter};
                                 System.out.println(tbData);
                                 DefaultTableModel tblModel = (DefaultTableModel)jTable.getModel();
                                 tblModel.addRow(tbData);
@@ -521,6 +526,7 @@ public class Mission extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel2;

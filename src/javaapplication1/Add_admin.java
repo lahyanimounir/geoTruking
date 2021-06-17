@@ -205,6 +205,40 @@ public class Add_admin extends javax.swing.JFrame {
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         // TODO add your handling code here:
         
+        try {
+                 connection connect = new connection();
+                    connect.connectionDb();
+                    String sql = "INSERT INTO `persone`(`nom`, `prenom`, `login`, `password`, `role`) VALUES (?,?,?,?,1)";
+ 
+                    PreparedStatement statement = connect.myconnection.prepareStatement(sql);
+                    statement.setString(1, con_name.getText());
+                    statement.setString(2, con_pre.getText());
+                    statement.setString(3, con_log.getText());
+                    statement.setString(4, con_pwd.getText());
+                    int rowsInserted = statement.executeUpdate();
+                    if (rowsInserted > 0) {
+                        Admin p = new Admin();
+                        double height = p.getHeight();
+                             double width = p.getWidth();
+                             Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+                                double widthscreen = screenSize.getWidth();               
+                                double heightscreen = screenSize.getHeight();
+
+
+
+                             int north =  (int)((widthscreen - width)/2);             
+                             int heightMiddel =  (int)((heightscreen - height)/2);
+
+                             p.setLocation(north, heightMiddel);
+
+                        p.setVisible(true);
+                        this.dispose();
+                    }
+            
+              
+            } catch (SQLException ex) {
+                Logger.getLogger(Add_admin.class.getName()).log(Level.SEVERE, null, ex);
+            }
         
     }//GEN-LAST:event_jButton1MouseClicked
 

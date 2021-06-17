@@ -59,7 +59,7 @@ public class Add_camion extends javax.swing.JFrame {
         Matricule = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        Ad_mac = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -106,13 +106,13 @@ public class Add_camion extends javax.swing.JFrame {
         jPanel1.add(jLabel4);
         jLabel4.setBounds(20, 160, 130, 40);
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        Ad_mac.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                Ad_macActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField1);
-        jTextField1.setBounds(170, 160, 210, 30);
+        jPanel1.add(Ad_mac);
+        Ad_mac.setBounds(170, 160, 210, 30);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javaapplication1/bg3.jpg"))); // NOI18N
         jPanel1.add(jLabel1);
@@ -146,7 +146,7 @@ public class Add_camion extends javax.swing.JFrame {
  
                     PreparedStatement statement = connect.myconnection.prepareStatement(sql);
                     statement.setString(1, Matricule.getText());
-                    statement.setString(2, jTextField1.getText());
+                    statement.setString(2, Ad_mac.getText());
 
                     int rowsInserted = statement.executeUpdate();
                     if (rowsInserted > 0) {
@@ -196,9 +196,9 @@ public class Add_camion extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jLabel2MouseClicked
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void Ad_macActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Ad_macActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_Ad_macActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
@@ -209,6 +209,7 @@ public class Add_camion extends javax.swing.JFrame {
      */
    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField Ad_mac;
     private javax.swing.JTextField Matricule;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
@@ -216,6 +217,5 @@ public class Add_camion extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }
