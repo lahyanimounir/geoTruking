@@ -8,25 +8,37 @@ package javaapplication1;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author user
  */
 public class Camion extends javax.swing.JFrame {
- private String id;
-            private String immatriculation;
-            private boolean selected;
-            static JFrame f;
-            
-             public void setId(String id) {
+    
+    
+        private String id;
+        private String immatriculation;
+        private String Mac;
+        private boolean selected;
+        static JFrame f;
+        
+        
+    public void setId(String id) {
         this.id = id;
     }
 
+     public void setMac(String Mac) {
+        this.Mac = Mac;
+    }
     public void setimmatriculation(String immatriculation) {
         this.immatriculation = immatriculation;
     }
@@ -38,34 +50,41 @@ public class Camion extends javax.swing.JFrame {
     public String getimmatriculation() {
         return immatriculation;
     }
+     
+     public String getMac() {
+        return Mac;
+    }
+       
     /**
-     * Creates new form Camion
+     * Creates new form acceuil
      */
     public Camion() {
         initComponents();
-        
-          try {
+        try {
             connection connect = new connection();
             connect.connectionDb();
           
             
-            mjTable1.getTableHeader().setOpaque(false);
-            mjTable1.getTableHeader().setBackground(new Color(32,136,203));
+            jTable.getTableHeader().setOpaque(false);
+            jTable.getTableHeader().setBackground(new Color(32,136,203));
            
      
               
         connect.myRes = connect.myst.executeQuery("select * from camion");
             while(connect.myRes.next()){
                 String id = String.valueOf(connect.myRes.getString("id"));
-                String immatriculation = String.valueOf(connect.myRes.getString("immatriculation"));
+                String matricule = String.valueOf(connect.myRes.getString("immatriculation"));
                 String mac = String.valueOf(connect.myRes.getString("mac"));
-                String tbData[] = {id,immatriculation,mac};
-                DefaultTableModel tblModel = (DefaultTableModel)mjTable1.getModel();
+                
+                String tbData[] = {id,matricule,mac};
+                System.out.println(tbData);
+                DefaultTableModel tblModel = (DefaultTableModel)jTable.getModel();
                 tblModel.addRow(tbData);
             }
              } catch (SQLException e) {
             System.out.println(e);
         }
+        
     }
 
     /**
@@ -77,21 +96,36 @@ public class Camion extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        jDialog1 = new javax.swing.JDialog();
         jLabel3 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        mjTable1 = new javax.swing.JTable();
+        jTable = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+
+        javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
+        jDialog1.getContentPane().setLayout(jDialog1Layout);
+        jDialog1Layout.setHorizontalGroup(
+            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        jDialog1Layout.setVerticalGroup(
+            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javaapplication1/bg3.png"))); // NOI18N
+        jLabel3.setText("jLabel3");
+        jLabel3.setFocusable(false);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javaapplication1/update.png"))); // NOI18N
-        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel2MouseClicked(evt);
-            }
-        });
+        jPanel2.setLayout(null);
 
         jButton1.setText("Ajouter");
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -99,13 +133,40 @@ public class Camion extends javax.swing.JFrame {
                 jButton1MouseClicked(evt);
             }
         });
-
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javaapplication1/trush.png"))); // NOI18N
-        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel3MouseClicked(evt);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
             }
         });
+        jPanel2.add(jButton1);
+        jButton1.setBounds(90, 80, 69, 23);
+
+        jTable.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Id", "Matriculation", "Mac adresse"
+            }
+        ));
+        jTable.setFocusable(false);
+        jTable.setIntercellSpacing(new java.awt.Dimension(0, 0));
+        jTable.setOpaque(false);
+        jTable.setRowHeight(30);
+        jTable.setSelectionBackground(new java.awt.Color(116, 192, 238));
+        jTable.setShowVerticalLines(false);
+        jTable.getTableHeader().setResizingAllowed(false);
+        jTable.getTableHeader().setReorderingAllowed(false);
+        jTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jTable);
+
+        jPanel2.add(jScrollPane1);
+        jScrollPane1.setBounds(90, 130, 640, 240);
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
         jLabel1.setText("précédent");
@@ -114,226 +175,208 @@ public class Camion extends javax.swing.JFrame {
                 jLabel1MouseClicked(evt);
             }
         });
+        jPanel2.add(jLabel1);
+        jLabel1.setBounds(40, 20, 90, 20);
 
-        mjTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "id", "Matriculation", "Mac"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                true, true, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        mjTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javaapplication1/update.png"))); // NOI18N
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                mjTable1MouseClicked(evt);
+                jLabel2MouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(mjTable1);
+        jPanel2.add(jLabel2);
+        jLabel2.setBounds(110, 420, 70, 90);
+
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javaapplication1/trush.png"))); // NOI18N
+        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel4MouseClicked(evt);
+            }
+        });
+        jPanel2.add(jLabel4);
+        jLabel4.setBounds(630, 420, 80, 100);
+
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javaapplication1/camion.png"))); // NOI18N
+        jPanel2.add(jLabel6);
+        jLabel6.setBounds(730, -20, 200, 200);
+
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javaapplication1/bg3.png"))); // NOI18N
+        jPanel2.add(jLabel5);
+        jLabel5.setBounds(-10, -10, 920, 630);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(125, 125, 125)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(87, 87, 87))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(152, 152, 152)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 562, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(113, Short.MAX_VALUE))
+            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 915, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34)
-                .addComponent(jButton1)
-                .addGap(34, 34, 34)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addGap(66, 66, 66))
+            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 626, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
-        // TODO add your handling code here:
-
-        Update_camion  c = new Update_camion(this.id,this.immatriculation);
-
-        double height = c.getHeight();
-        double width = c.getWidth();
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        double widthscreen = screenSize.getWidth();
-        double heightscreen = screenSize.getHeight();
-
-        int north =  (int)((widthscreen - width)/2);
-        int heightMiddel =  (int)((heightscreen - height)/2);
-
-        c.setLocation(north, heightMiddel);
-
-        if(this.selected){
-
-            c.setVisible(true);
-            this.dispose();
-        }else{
-            System.out.print("Merci de selectioné....");
-        }
-
-    }//GEN-LAST:event_jLabel2MouseClicked
-
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         // TODO add your handling code here:
-
         Add_camion add = new Add_camion();
+        
+        
+            double height = add.getHeight();
+             double width = add.getWidth();
+             Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+                double widthscreen = screenSize.getWidth();               
+                double heightscreen = screenSize.getHeight();
 
-        double height = add.getHeight();
-        double width = add.getWidth();
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        double widthscreen = screenSize.getWidth();
-        double heightscreen = screenSize.getHeight();
+             
+            
+             int north =  (int)((widthscreen - width)/2);             
+             int heightMiddel =  (int)((heightscreen - height)/2);
 
-        int north =  (int)((widthscreen - width)/2);
-        int heightMiddel =  (int)((heightscreen - height)/2);
-
-        add.setLocation(north, heightMiddel);
-
+             add.setLocation(north, heightMiddel);
+        
         add.setVisible(true);
         this.dispose();
-
+        
+            
     }//GEN-LAST:event_jButton1MouseClicked
-
-    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
-        // TODO add your handling code here:
-        try {
-            connection connect = new connection();
-            connect.connectionDb();
-
-            String sql = "DELETE FROM `camion` WHERE `id`= ?";
-
-            PreparedStatement statement = connect.myconnection.prepareStatement(sql);
-            statement.setString(1, this.id);
-
-            int rowsInserted = statement.executeUpdate();
-
-            DefaultTableModel dm = (DefaultTableModel) this.mjTable1.getModel();
-            int rowCount = dm.getRowCount();
-            //Remove rows one by one from the end of the table
-            for (int i = rowCount - 1; i >= 0; i--) {
-                dm.removeRow(i);
-            }
-
-            connect.myRes = connect.myst.executeQuery("select * from camion");
-
-            while(connect.myRes.next()){
-                String id = String.valueOf(connect.myRes.getString("id"));
-                String immatriculation = String.valueOf(connect.myRes.getString("immatriculation"));                
-                String mac = String.valueOf(connect.myRes.getString("mac"));
-
-
-                String tbData[] = {id,immatriculation,mac};
-                DefaultTableModel tblModel = (DefaultTableModel)this.mjTable1.getModel();
-                tblModel.addRow(tbData);
-            }
-
-        } catch (SQLException ex) {
-            Logger.getLogger(Update_camion.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_jLabel3MouseClicked
 
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
         // TODO add your handling code here:
+         acceuil a = new acceuil();
+        
+        
+            double height = a.getHeight();
+             double width = a.getWidth();
+             Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+                double widthscreen = screenSize.getWidth();               
+                double heightscreen = screenSize.getHeight();
 
-        acceuil a = new acceuil();
+             
+            
+             int north =  (int)((widthscreen - width)/2);             
+             int heightMiddel =  (int)((heightscreen - height)/2);
 
-        double height = a.getHeight();
-        double width = a.getWidth();
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        double widthscreen = screenSize.getWidth();
-        double heightscreen = screenSize.getHeight();
-
-        int north =  (int)((widthscreen - width)/2);
-        int heightMiddel =  (int)((heightscreen - height)/2);
-
-        a.setLocation(north, heightMiddel);
-
+             a.setLocation(north, heightMiddel);
+        
         a.setVisible(true);
         this.dispose();
+        
     }//GEN-LAST:event_jLabel1MouseClicked
 
-    private void mjTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mjTable1MouseClicked
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
         // TODO add your handling code here:
         
-         DefaultTableModel model = (DefaultTableModel) mjTable1.getModel();
-        int selectedrow = mjTable1.getSelectedRow();
+        Update_camion u = new Update_camion(this.id,this.immatriculation,this.Mac);
+        
+         double height = u.getHeight();
+             double width = u.getWidth();
+             Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+                double widthscreen = screenSize.getWidth();               
+                double heightscreen = screenSize.getHeight();
+
+             
+            
+             int north =  (int)((widthscreen - width)/2);             
+             int heightMiddel =  (int)((heightscreen - height)/2);
+
+             u.setLocation(north, heightMiddel);
+            
+
+
+             if(this.selected){
+                  
+                 u.setVisible(true);
+                 this.dispose();
+             }else{
+                System.out.print("Merci de selectioné....");
+             }
+       
+        
+    }//GEN-LAST:event_jLabel2MouseClicked
+
+    private void jTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableMouseClicked
+        // TODO add your handling code here:
+        
+        DefaultTableModel model = (DefaultTableModel) jTable.getModel();
+        int selectedrow = jTable.getSelectedRow();
         
         
         this.setId(model.getValueAt(selectedrow, 0).toString());        
         this.setimmatriculation( model.getValueAt(selectedrow, 1).toString());
+        this.setMac(model.getValueAt(selectedrow, 2).toString());
         this.selected = true;
-    }//GEN-LAST:event_mjTable1MouseClicked
+            
+        /**/
+     
+    }//GEN-LAST:event_jTableMouseClicked
 
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
+    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
+        // TODO add your handling code here:
+        
+        
+        
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Camion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Camion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Camion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Camion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+                 connection connect = new connection();
+                    connect.connectionDb();
+                    
+                    String sql = "DELETE FROM `camion` WHERE `id`= ?";
+ 
+                    PreparedStatement statement = connect.myconnection.prepareStatement(sql);
+                    statement.setString(1, this.id);                      
+                    
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Camion().setVisible(true);
+                    int rowsInserted = statement.executeUpdate();
+                 
+                      DefaultTableModel dm = (DefaultTableModel) this.jTable.getModel();
+                      int rowCount = dm.getRowCount();
+                      //Remove rows one by one from the end of the table
+                      for (int i = rowCount - 1; i >= 0; i--) {
+                          dm.removeRow(i);
+                      }
+                          
+                          
+                          
+                    connect.myRes = connect.myst.executeQuery("select * from camion");
+                   
+                    while(connect.myRes.next()){
+                        String id = String.valueOf(connect.myRes.getString("id"));
+                        String matricule = String.valueOf(connect.myRes.getString("immatriculation"));
+                        String Mac = String.valueOf(connect.myRes.getString("mac"));
+
+                        String tbData[] = {id,matricule,Mac};
+                        DefaultTableModel tblModel = (DefaultTableModel)this.jTable.getModel();
+                        tblModel.addRow(tbData);
+                    }
+         
+            
+              
+            } catch (SQLException ex) {
+                Logger.getLogger(Update_ville.class.getName()).log(Level.SEVERE, null, ex);
             }
-        });
-    }
+        
+    }//GEN-LAST:event_jLabel4MouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    /**
+     * @param args the command line arguments
+     */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JDialog jDialog1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable mjTable1;
+    private javax.swing.JTable jTable;
     // End of variables declaration//GEN-END:variables
 }

@@ -305,8 +305,7 @@ String sql = "INSERT INTO `mission`(`date_depart`,`date_arriver`,`id_conducteur`
                    
                 
                     if (rowsInserted > 0) {
-                        System.out.print(conducteur_s.split(",")[0]+"hna tah rial");
-                        this.insert_suivi(conducteur_s.split(",")[0]);
+                        this.insert_suivi(mat.split(",")[0]);
                         
                         Mission mission = new Mission();
                         double height = mission.getHeight();
@@ -334,7 +333,7 @@ String sql = "INSERT INTO `mission`(`date_depart`,`date_arriver`,`id_conducteur`
         
     }//GEN-LAST:event_jButton1MouseClicked
 private void insert_suivi(String id_camion){
-  
+   System.out.println("dkhoul"+id_camion);    
     String id_mission = null;
  try {   connection connect = new connection();
             connect.connectionDb();
@@ -345,8 +344,9 @@ private void insert_suivi(String id_camion){
                  id_mission= String.valueOf(connect.myRes.getString("id"));
                
             }
-                   
+               System.out.print("l3boo 3lih"+id_mission);    
          String sql="INSERT INTO `suivi`(`id_camion`, `id_mission`) VALUES (?,?)";
+         System.out.println(sql);
          PreparedStatement statement = connect.myconnection.prepareStatement(sql);
                   statement.setString(1, id_camion);
                     statement.setString(2, id_mission);

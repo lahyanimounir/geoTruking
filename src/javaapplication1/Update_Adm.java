@@ -27,48 +27,28 @@ public class Update_Adm extends javax.swing.JFrame {
     private String prénom;
     private String login;
     private String password;
+    private String cin;
         static JFrame f;
     /**
      * Creates new form acceuil
      */
         
-      public Update_Adm(String id, String nom,String prénom,String login, String password){
+      public Update_Adm(String id, String nom,String prénom,String login, String password,String cin){
           this.id = id;
          this.nom = nom;
          this.prénom = prénom;
          this.login = login;
          this.password = password;
+         this.cin = cin;
           initComponents();
            this.Con_name.setText(this.nom);
           this.Con_pre.setText(this.prénom);
           this.Con_log.setText(this.login);
-          this.Con_pwd.setText(this.password);
-         
-        
+          this.Con_pwd.setText(this.password);          
+          this.Con_cin.setText(this.cin);
+
       }
-    public Update_Adm() {
-       
-       /* try {
-            connection connect = new connection();
-            connect.connectionDb();
-          
-            
-          
-           
-              
-        connect.myRes = connect.myst.executeQuery("select * from ville");
-            while(connect.myRes.next()){
-                String id = String.valueOf(connect.myRes.getString("id"));
-                String nom = String.valueOf(connect.myRes.getString("nom"));
-                
-                String tbData[] = {id,nom};
-           
-            }
-             } catch (SQLException e) {
-            System.out.println(e);
-        }*/
-        
-    }
+  
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -92,7 +72,7 @@ public class Update_Adm extends javax.swing.JFrame {
         Con_log = new javax.swing.JTextField();
         Con_pwd = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        is_admin = new javax.swing.JCheckBox();
+        Con_cin = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
@@ -115,7 +95,7 @@ public class Update_Adm extends javax.swing.JFrame {
         jPanel2.add(jLabel1);
         jLabel1.setBounds(40, 70, 34, 14);
         jPanel2.add(Con_name);
-        Con_name.setBounds(120, 60, 130, 30);
+        Con_name.setBounds(120, 60, 230, 30);
 
         addcity.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
         addcity.setText("Enregistrer");
@@ -125,7 +105,7 @@ public class Update_Adm extends javax.swing.JFrame {
             }
         });
         jPanel2.add(addcity);
-        addcity.setBounds(300, 270, 110, 27);
+        addcity.setBounds(240, 330, 110, 27);
 
         jLabel2.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
         jLabel2.setText("précédent");
@@ -135,7 +115,7 @@ public class Update_Adm extends javax.swing.JFrame {
             }
         });
         jPanel2.add(jLabel2);
-        jLabel2.setBounds(40, 20, 80, 30);
+        jLabel2.setBounds(20, 10, 80, 30);
 
         jLabel4.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jLabel4.setText("Prénom");
@@ -145,12 +125,12 @@ public class Update_Adm extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jLabel5.setText("Login");
         jPanel2.add(jLabel5);
-        jLabel5.setBounds(40, 170, 40, 20);
+        jLabel5.setBounds(40, 220, 40, 20);
 
         jLabel6.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jLabel6.setText("Password");
         jPanel2.add(jLabel6);
-        jLabel6.setBounds(30, 220, 60, 30);
+        jLabel6.setBounds(30, 270, 60, 30);
 
         Con_pre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -158,36 +138,34 @@ public class Update_Adm extends javax.swing.JFrame {
             }
         });
         jPanel2.add(Con_pre);
-        Con_pre.setBounds(120, 110, 130, 30);
+        Con_pre.setBounds(120, 110, 230, 30);
         jPanel2.add(Con_log);
-        Con_log.setBounds(120, 160, 130, 30);
+        Con_log.setBounds(120, 210, 230, 30);
         jPanel2.add(Con_pwd);
-        Con_pwd.setBounds(120, 210, 130, 30);
+        Con_pwd.setBounds(120, 270, 230, 30);
 
-        jLabel7.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jLabel7.setText("Administrateur");
+        jLabel7.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
+        jLabel7.setText("Cin");
         jPanel2.add(jLabel7);
-        jLabel7.setBounds(30, 270, 90, 20);
-        jPanel2.add(is_admin);
-        is_admin.setBounds(140, 270, 20, 21);
+        jLabel7.setBounds(40, 170, 30, 14);
+        jPanel2.add(Con_cin);
+        Con_cin.setBounds(120, 160, 230, 30);
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javaapplication1/bg3.png"))); // NOI18N
         jLabel3.setText("jLabel3");
         jLabel3.setFocusable(false);
         jPanel2.add(jLabel3);
-        jLabel3.setBounds(0, -10, 450, 350);
+        jLabel3.setBounds(0, -10, 400, 430);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 446, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 415, Short.MAX_VALUE)
         );
 
         pack();
@@ -196,7 +174,7 @@ public class Update_Adm extends javax.swing.JFrame {
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
         // TODO add your handling code here:
         
-        Pesonne p = new Pesonne();
+        Admin p = new Admin();
         double height = p.getHeight();
              double width = p.getWidth();
              Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -216,21 +194,13 @@ public class Update_Adm extends javax.swing.JFrame {
 
     private void addcityMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addcityMouseClicked
         // TODO add your handling code here:
-         String isSelected = "0";
-       if(is_admin.isSelected()){
-          isSelected ="1";
-       }
-       else{
-       isSelected="0";
-       }
-   
-          
-              
+         String isSelected = "1";
+                
             try {
                  connection connect = new connection();
                     connect.connectionDb();
                     
-                    String sql = "UPDATE `persone` SET `nom`=?,`prenom`=?,`login`=?,`password`=?,`role`=? WHERE `id`=?";
+                    String sql = "UPDATE `persone` SET `nom`=?,`prenom`=?,`login`=?,`password`=?,`cin`=?,`role`=? WHERE `id`=?";
                     
  
                     PreparedStatement statement = connect.myconnection.prepareStatement(sql);
@@ -238,9 +208,12 @@ public class Update_Adm extends javax.swing.JFrame {
                     statement.setString(1, Con_name.getText());
                     statement.setString(2, Con_pre.getText());
                     statement.setString(3, Con_log.getText());
-                    statement.setString(4, Con_pwd.getText()); 
-                    statement.setString(5,isSelected ); 
-                    statement.setString(6, this.id);
+                    statement.setString(4, Con_pwd.getText());                     
+                    statement.setString(5, Con_cin.getText()); 
+
+                    
+                    statement.setString(6,isSelected ); 
+                    statement.setString(7, this.id);
                     
 
                     int rowsInserted = statement.executeUpdate();
@@ -277,12 +250,12 @@ public class Update_Adm extends javax.swing.JFrame {
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField Con_cin;
     private javax.swing.JTextField Con_log;
     private javax.swing.JTextField Con_name;
     private javax.swing.JTextField Con_pre;
     private javax.swing.JTextField Con_pwd;
     private javax.swing.JButton addcity;
-    private javax.swing.JCheckBox is_admin;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

@@ -76,6 +76,8 @@ public class Add_admin extends javax.swing.JFrame {
         con_log = new javax.swing.JTextField();
         con_pwd = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        con_cin = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
@@ -124,12 +126,12 @@ public class Add_admin extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jLabel5.setText("Login");
         jPanel2.add(jLabel5);
-        jLabel5.setBounds(120, 200, 50, 30);
+        jLabel5.setBounds(120, 260, 50, 30);
 
         jLabel6.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jLabel6.setText("Password");
         jPanel2.add(jLabel6);
-        jLabel6.setBounds(120, 240, 60, 40);
+        jLabel6.setBounds(120, 300, 60, 40);
 
         con_pre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -139,9 +141,9 @@ public class Add_admin extends javax.swing.JFrame {
         jPanel2.add(con_pre);
         con_pre.setBounds(220, 150, 160, 30);
         jPanel2.add(con_log);
-        con_log.setBounds(220, 200, 160, 30);
+        con_log.setBounds(220, 260, 160, 30);
         jPanel2.add(con_pwd);
-        con_pwd.setBounds(220, 250, 160, 30);
+        con_pwd.setBounds(220, 310, 160, 30);
 
         jButton1.setText("Ajouter");
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -151,6 +153,18 @@ public class Add_admin extends javax.swing.JFrame {
         });
         jPanel2.add(jButton1);
         jButton1.setBounds(440, 350, 73, 23);
+
+        jLabel7.setText("Cin");
+        jPanel2.add(jLabel7);
+        jLabel7.setBounds(120, 210, 70, 20);
+
+        con_cin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                con_cinActionPerformed(evt);
+            }
+        });
+        jPanel2.add(con_cin);
+        con_cin.setBounds(220, 210, 160, 30);
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javaapplication1/bg3.png"))); // NOI18N
         jLabel3.setText("jLabel3");
@@ -175,9 +189,9 @@ public class Add_admin extends javax.swing.JFrame {
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
         // TODO add your handling code here:
         
-        Admin P = new Admin();
-        double height = P.getHeight();
-             double width = P.getWidth();
+        Admin admin = new Admin();
+        double height = admin.getHeight();
+             double width = admin.getWidth();
              Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
                 double widthscreen = screenSize.getWidth();               
                 double heightscreen = screenSize.getHeight();
@@ -187,9 +201,9 @@ public class Add_admin extends javax.swing.JFrame {
              int north =  (int)((widthscreen - width)/2);             
              int heightMiddel =  (int)((heightscreen - height)/2);
 
-             P.setLocation(north, heightMiddel);
+             admin.setLocation(north, heightMiddel);
         
-        P.setVisible(true);
+        admin.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jLabel2MouseClicked
 
@@ -205,14 +219,55 @@ public class Add_admin extends javax.swing.JFrame {
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         // TODO add your handling code here:
         
+        try {
+                 connection connect = new connection();
+                    connect.connectionDb();
+                    String sql = "INSERT INTO `persone`(`nom`, `prenom`, `login`, `password`,`cin`, `role`) VALUES (?,?,?,?,?,1)";
+ 
+                    PreparedStatement statement = connect.myconnection.prepareStatement(sql);
+                    statement.setString(1, con_name.getText());
+                    statement.setString(2, con_pre.getText());
+                    statement.setString(3, con_log.getText());
+                    statement.setString(4, con_pwd.getText());                    
+                    statement.setString(5, con_cin.getText());
+                    
+                    int rowsInserted = statement.executeUpdate();
+                    if (rowsInserted > 0) {
+                        Admin p = new Admin();
+                        double height = p.getHeight();
+                             double width = p.getWidth();
+                             Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+                                double widthscreen = screenSize.getWidth();               
+                                double heightscreen = screenSize.getHeight();
+
+
+
+                             int north =  (int)((widthscreen - width)/2);             
+                             int heightMiddel =  (int)((heightscreen - height)/2);
+
+                             p.setLocation(north, heightMiddel);
+
+                        p.setVisible(true);
+                        this.dispose();
+                    }
+            
+              
+            } catch (SQLException ex) {
+                Logger.getLogger(Add_admin.class.getName()).log(Level.SEVERE, null, ex);
+            }
         
     }//GEN-LAST:event_jButton1MouseClicked
+
+    private void con_cinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_con_cinActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_con_cinActionPerformed
 
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField con_cin;
     private javax.swing.JTextField con_log;
     private javax.swing.JTextField con_name;
     private javax.swing.JTextField con_pre;
@@ -225,6 +280,7 @@ public class Add_admin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
 }

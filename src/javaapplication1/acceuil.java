@@ -165,28 +165,28 @@ public class acceuil extends javax.swing.JFrame {
 
     private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
         // TODO add your handling code here:
-        /*    Camion camion = new Camion();
+            Camion camion = new Camion();
         camion.setVisible(true);
         double height = camion.getHeight();
              double width = camion.getWidth();
             Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
                 double widthscreen = screenSize.getWidth();               
                 double heightscreen = screenSize.getHeight();
-              int north1 =  (int)(widthscreen *2/3);             
+             /* int north1 =  (int)(widthscreen *2/3);             
              int heightMiddel1 =  (int)(heightscreen *2/3);
-             camion.setSize(north1, heightMiddel1);
+             camion.setSize(north1, heightMiddel1);*/
              
           int north =  (int)((widthscreen - width)/2);             
             int heightMiddel =  (int)((heightscreen - height)/2);
              camion.setLocation(north, heightMiddel);
-            this.dispose();*/
+            this.dispose();
             
             
             
             
             
             
-               Camion cond = new Camion();
+            /* Camion cond = new Camion();
         cond.setVisible(true);
         double height = cond.getHeight();
              double width = cond.getWidth();
@@ -200,7 +200,7 @@ public class acceuil extends javax.swing.JFrame {
              int heightMiddel =  (int)((heightscreen - height)/2);
 
                cond.setLocation(north, heightMiddel);
-               this.dispose();
+               this.dispose();*/
 
             
         

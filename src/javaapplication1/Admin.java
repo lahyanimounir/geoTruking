@@ -29,7 +29,8 @@ public class Admin extends javax.swing.JFrame {
     protected String nom ;
     protected String prénom ;
     protected String login ;
-    protected String password ;
+    protected String password ;    
+    protected String cin;
     protected int role ;
     private boolean selected;
     static JFrame f;
@@ -43,6 +44,9 @@ public class Admin extends javax.swing.JFrame {
         this.nom = nom;
     }
 
+    public void setcin(String cin) {
+        this.cin = cin;
+    }
      public void setprénom(String prénom) {
         this.prénom = prénom;
     }
@@ -92,14 +96,16 @@ public class Admin extends javax.swing.JFrame {
                 String nom = String.valueOf(connect.myRes.getString("nom"));                
                 String prenom = String.valueOf(connect.myRes.getString("prenom"));                
                 String login = String.valueOf(connect.myRes.getString("login"));                
-                String password = String.valueOf(connect.myRes.getString("password"));
+                String password = String.valueOf(connect.myRes.getString("password"));                
+                String cin = String.valueOf(connect.myRes.getString("cin"));
+
                 String roleToShow = "Administrateur";
                 
 
 
 
                 
-                String tbData[] = {id,nom,prenom,login,password,roleToShow};
+                String tbData[] = {id,nom,prenom,login,password,cin,roleToShow};
                 System.out.println(tbData);
                 DefaultTableModel tblModel = (DefaultTableModel)jTable.getModel();
                 tblModel.addRow(tbData);
@@ -128,6 +134,8 @@ public class Admin extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
         jDialog1.getContentPane().setLayout(jDialog1Layout);
@@ -155,7 +163,7 @@ public class Admin extends javax.swing.JFrame {
             }
         });
         jPanel2.add(jButton1);
-        jButton1.setBounds(90, 80, 69, 23);
+        jButton1.setBounds(70, 80, 69, 23);
 
         jTable.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -163,7 +171,7 @@ public class Admin extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Id", "Nom", "Prenom", "login", "password", "Role"
+                "Id", "Nom", "Prenom", "login", "password", "Cin", "Role"
             }
         ));
         jTable.setFocusable(false);
@@ -182,7 +190,7 @@ public class Admin extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTable);
 
         jPanel2.add(jScrollPane1);
-        jScrollPane1.setBounds(90, 130, 640, 240);
+        jScrollPane1.setBounds(70, 130, 640, 240);
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
         jLabel1.setText("précédent");
@@ -201,7 +209,7 @@ public class Admin extends javax.swing.JFrame {
             }
         });
         jPanel2.add(jLabel2);
-        jLabel2.setBounds(110, 420, 70, 90);
+        jLabel2.setBounds(70, 420, 70, 90);
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javaapplication1/trush.png"))); // NOI18N
         jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -210,7 +218,15 @@ public class Admin extends javax.swing.JFrame {
             }
         });
         jPanel2.add(jLabel4);
-        jLabel4.setBounds(770, 410, 80, 100);
+        jLabel4.setBounds(620, 420, 80, 100);
+
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javaapplication1/admin.png"))); // NOI18N
+        jPanel2.add(jLabel6);
+        jLabel6.setBounds(760, 10, 150, 170);
+
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javaapplication1/bg3.png"))); // NOI18N
+        jPanel2.add(jLabel5);
+        jLabel5.setBounds(0, 0, 920, 580);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -276,7 +292,7 @@ public class Admin extends javax.swing.JFrame {
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
         // TODO add your handling code here:
         
-        Update_Adm u = new Update_Adm(this.id,this.nom,this.prénom,this.login, this.password);
+        Update_Adm u = new Update_Adm(this.id,this.nom,this.prénom,this.login, this.password,this.cin);
         
          double height = u.getHeight();
              double width = u.getWidth();
@@ -315,7 +331,9 @@ public class Admin extends javax.swing.JFrame {
         this.setnom( model.getValueAt(selectedrow, 1).toString());
         this.setprénom( model.getValueAt(selectedrow, 2).toString());
         this.setlogin( model.getValueAt(selectedrow, 3).toString());
-        this.setpassword( model.getValueAt(selectedrow, 4).toString());
+        this.setpassword( model.getValueAt(selectedrow, 4).toString());        
+        this.setcin( model.getValueAt(selectedrow, 5).toString());
+        
         this.role=1;
         this.selected = true;
             
@@ -384,6 +402,8 @@ public class Admin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable;

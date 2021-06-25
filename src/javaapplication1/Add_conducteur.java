@@ -71,11 +71,9 @@ public class Add_conducteur extends javax.swing.JFrame {
         addcity = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         con_pre = new javax.swing.JTextField();
-        con_log = new javax.swing.JTextField();
-        con_pwd = new javax.swing.JTextField();
+        con_cin = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
@@ -114,7 +112,7 @@ public class Add_conducteur extends javax.swing.JFrame {
             }
         });
         jPanel2.add(addcity);
-        addcity.setBounds(410, 370, 110, 27);
+        addcity.setBounds(180, 260, 110, 27);
 
         jLabel2.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
         jLabel2.setText("précédent");
@@ -131,15 +129,10 @@ public class Add_conducteur extends javax.swing.JFrame {
         jPanel2.add(jLabel4);
         jLabel4.setBounds(60, 130, 50, 20);
 
-        jLabel5.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jLabel5.setText("Login");
-        jPanel2.add(jLabel5);
-        jLabel5.setBounds(60, 180, 50, 20);
-
         jLabel6.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jLabel6.setText("Password");
+        jLabel6.setText("Cin");
         jPanel2.add(jLabel6);
-        jLabel6.setBounds(60, 220, 60, 30);
+        jLabel6.setBounds(60, 180, 60, 30);
 
         con_pre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -148,10 +141,8 @@ public class Add_conducteur extends javax.swing.JFrame {
         });
         jPanel2.add(con_pre);
         con_pre.setBounds(130, 120, 160, 30);
-        jPanel2.add(con_log);
-        con_log.setBounds(130, 170, 160, 30);
-        jPanel2.add(con_pwd);
-        con_pwd.setBounds(130, 220, 160, 30);
+        jPanel2.add(con_cin);
+        con_cin.setBounds(130, 180, 160, 30);
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javaapplication1/bg3.png"))); // NOI18N
         jLabel3.setText("jLabel3");
@@ -163,11 +154,11 @@ public class Add_conducteur extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 586, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 432, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 345, Short.MAX_VALUE)
         );
 
         pack();
@@ -195,19 +186,19 @@ public class Add_conducteur extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel2MouseClicked
 
     private void addcityMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addcityMouseClicked
+
         // TODO add your handling code here:
         
       
             try {
                  connection connect = new connection();
                     connect.connectionDb();
-                    String sql = "INSERT INTO `persone`(`nom`, `prenom`, `login`, `password`, `role`) VALUES (?,?,?,?,0)";
+                    String sql = "INSERT INTO `persone`(`nom`, `prenom`, `cin`,`role`) VALUES (?,?,?,0)";
  
                     PreparedStatement statement = connect.myconnection.prepareStatement(sql);
                     statement.setString(1, con_name.getText());
                     statement.setString(2, con_pre.getText());
-                    statement.setString(3, con_log.getText());
-                    statement.setString(4, con_pwd.getText());
+                    statement.setString(3, con_cin.getText());
                     int rowsInserted = statement.executeUpdate();
                     if (rowsInserted > 0) {
                         Pesonne p = new Pesonne();
@@ -250,16 +241,14 @@ public class Add_conducteur extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addcity;
-    private javax.swing.JTextField con_log;
+    private javax.swing.JTextField con_cin;
     private javax.swing.JTextField con_name;
     private javax.swing.JTextField con_pre;
-    private javax.swing.JTextField con_pwd;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables

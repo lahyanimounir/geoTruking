@@ -26,50 +26,30 @@ public class Update_Con extends javax.swing.JFrame {
     private String nom;
     private String prénom;
     private String login;
-    private String password;
+    private String password;    
+    private String cin;
+
         static JFrame f;
     /**
      * Creates new form acceuil
      */
         
-      public Update_Con(String id, String nom,String prénom,String login, String password){
+      public Update_Con(String id, String nom,String prénom,String cin){
+         initComponents();
           this.id = id;
          this.nom = nom;
          this.prénom = prénom;
-         this.login = login;
-         this.password = password;
-          initComponents();
+         this.cin = cin;
+     
+          
            this.Con_name.setText(this.nom);
-          this.Con_pre.setText(this.prénom);
-          this.Con_log.setText(this.login);
-          this.Con_pwd.setText(this.password);
+          this.Con_pre.setText(this.prénom);         
+          this.Con_cin.setText(this.cin);
+
          
         
       }
-    public Update_Con() {
-       
-       /* try {
-            connection connect = new connection();
-            connect.connectionDb();
-          
-            
-          
-           
-              
-        connect.myRes = connect.myst.executeQuery("select * from ville");
-            while(connect.myRes.next()){
-                String id = String.valueOf(connect.myRes.getString("id"));
-                String nom = String.valueOf(connect.myRes.getString("nom"));
-                
-                String tbData[] = {id,nom};
-           
-            }
-             } catch (SQLException e) {
-            System.out.println(e);
-        }*/
-        
-    }
-
+  
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -86,13 +66,9 @@ public class Update_Con extends javax.swing.JFrame {
         addcity = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         Con_pre = new javax.swing.JTextField();
-        Con_log = new javax.swing.JTextField();
-        Con_pwd = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
-        is_admin = new javax.swing.JCheckBox();
+        Con_cin = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
@@ -113,9 +89,9 @@ public class Update_Con extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
         jLabel1.setText("Nom");
         jPanel2.add(jLabel1);
-        jLabel1.setBounds(40, 70, 34, 14);
+        jLabel1.setBounds(40, 90, 34, 14);
         jPanel2.add(Con_name);
-        Con_name.setBounds(130, 60, 130, 30);
+        Con_name.setBounds(130, 80, 180, 30);
 
         addcity.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
         addcity.setText("Enregistrer");
@@ -125,7 +101,7 @@ public class Update_Con extends javax.swing.JFrame {
             }
         });
         jPanel2.add(addcity);
-        addcity.setBounds(310, 270, 110, 27);
+        addcity.setBounds(200, 280, 110, 27);
 
         jLabel2.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
         jLabel2.setText("précédent");
@@ -140,17 +116,12 @@ public class Update_Con extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jLabel4.setText("Prénom");
         jPanel2.add(jLabel4);
-        jLabel4.setBounds(40, 120, 60, 20);
-
-        jLabel5.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jLabel5.setText("Login");
-        jPanel2.add(jLabel5);
-        jLabel5.setBounds(40, 170, 40, 20);
+        jLabel4.setBounds(40, 140, 60, 20);
 
         jLabel6.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jLabel6.setText("Password");
+        jLabel6.setText("Cin");
         jPanel2.add(jLabel6);
-        jLabel6.setBounds(40, 220, 60, 30);
+        jLabel6.setBounds(40, 200, 60, 30);
 
         Con_pre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -158,44 +129,25 @@ public class Update_Con extends javax.swing.JFrame {
             }
         });
         jPanel2.add(Con_pre);
-        Con_pre.setBounds(130, 110, 130, 30);
-        jPanel2.add(Con_log);
-        Con_log.setBounds(130, 160, 130, 30);
-        jPanel2.add(Con_pwd);
-        Con_pwd.setBounds(130, 210, 130, 30);
-
-        jLabel7.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jLabel7.setText("Administrateur");
-        jPanel2.add(jLabel7);
-        jLabel7.setBounds(40, 270, 90, 20);
-
-        is_admin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                is_adminActionPerformed(evt);
-            }
-        });
-        jPanel2.add(is_admin);
-        is_admin.setBounds(170, 270, 20, 21);
+        Con_pre.setBounds(130, 140, 180, 30);
+        jPanel2.add(Con_cin);
+        Con_cin.setBounds(130, 200, 180, 30);
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javaapplication1/bg3.png"))); // NOI18N
         jLabel3.setText("jLabel3");
         jLabel3.setFocusable(false);
         jPanel2.add(jLabel3);
-        jLabel3.setBounds(0, -10, 470, 350);
+        jLabel3.setBounds(0, -10, 340, 370);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 467, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 361, Short.MAX_VALUE)
         );
 
         pack();
@@ -224,31 +176,21 @@ public class Update_Con extends javax.swing.JFrame {
 
     private void addcityMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addcityMouseClicked
         // TODO add your handling code here:
-         String isSelected = "0";
-       if(is_admin.isSelected()){
-          isSelected ="1";
-       }
-       else{
-       isSelected="0";
-       }
-   
-          
-              
+                  
             try {
                  connection connect = new connection();
                     connect.connectionDb();
                     
-                    String sql = "UPDATE `persone` SET `nom`=?,`prenom`=?,`login`=?,`password`=?,`role`=? WHERE `id`=?";
+                    String sql = "UPDATE `persone` SET `nom`=?,`prenom`=?,`cin`=?, `role`=? WHERE `id`=?";
                     
  
                     PreparedStatement statement = connect.myconnection.prepareStatement(sql);
                      
                     statement.setString(1, Con_name.getText());
                     statement.setString(2, Con_pre.getText());
-                    statement.setString(3, Con_log.getText());
-                    statement.setString(4, Con_pwd.getText()); 
-                     statement.setString(5,isSelected ); 
-                    statement.setString(6, this.id);
+                    statement.setString(3, Con_cin.getText()); 
+                     statement.setString(4 ,"0"); 
+                    statement.setString(5, this.id);
                     
 
                     int rowsInserted = statement.executeUpdate();
@@ -280,29 +222,21 @@ public class Update_Con extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_Con_preActionPerformed
 
-    private void is_adminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_is_adminActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_is_adminActionPerformed
-
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField Con_log;
+    private javax.swing.JTextField Con_cin;
     private javax.swing.JTextField Con_name;
     private javax.swing.JTextField Con_pre;
-    private javax.swing.JTextField Con_pwd;
     private javax.swing.JButton addcity;
-    private javax.swing.JCheckBox is_admin;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
 }
